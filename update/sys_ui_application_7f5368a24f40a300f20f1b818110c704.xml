@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_application">
+    <sys_ui_application action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <hint/>
+        <name>Location</name>
+        <order/>
+        <roles>x_261942_ot.organizations_user</roles>
+        <sys_class_name>sys_ui_application</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-08-23 15:35:29</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>7f5368a24f40a300f20f1b818110c704</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Location</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
+        <sys_update_name>sys_ui_application_7f5368a24f40a300f20f1b818110c704</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-08-23 15:35:29</sys_updated_on>
+    </sys_ui_application>
+</record_update>

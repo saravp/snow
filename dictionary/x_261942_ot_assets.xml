@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Assets" max_length="40" name="x_261942_ot_assets" type="collection">
+        <element label="Total Count" max_length="40" name="count" read_only="true" type="integer"/>
+        <element label="Last Synced" max_length="40" name="last_synced" read_only="true" type="glide_date_time"/>
+        <element label="Last Sync Status" max_length="40" name="last_sync_status" read_only="true" type="string"/>
+        <element display="true" label="Synced" max_length="40" name="synced" read_only="true" type="integer"/>
+        <element choice="1" label="Type" mandatory="true" max_length="40" name="type" reference="x_261942_ot_assettype" type="string">
+            <choice>
+                <element inactive_on_update="false" label="Application" sequence="0" value="Application"/>
+                <element inactive="true" inactive_on_update="true" label="HardDisk" sequence="0" value="harddisk"/>
+                <element inactive="true" inactive_on_update="true" label="Choice 2" sequence="1" value="Choice 2"/>
+                <element inactive_on_update="false" label="Vendor" sequence="1" value="Vendor"/>
+                <element inactive="true" inactive_on_update="true" label="Choice 3" sequence="2" value="Choice 3"/>
+                <element inactive_on_update="false" label="Database" sequence="2" value="Database"/>
+                <element inactive_on_update="false" label="Physical Storage" sequence="3" value="physical storage"/>
+            </choice>
+        </element>
+    </element>
+</database>

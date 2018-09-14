@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element audit="true" label="Asset" max_length="40" name="alm_asset" type="collection">
+        <element label="OT_guid" max_length="255" name="x_261942_ot_ot_guid" type="string_full_utf8"/>
+    </element>
+</database>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="" label="APIKey" language="en" table="x_261942_ot_apikey">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element/>
+            <help/>
+            <hint/>
+            <label>APIKey</label>
+            <language>en</language>
+            <name>x_261942_ot_apikey</name>
+            <plural>APIKeys</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-08-24 19:02:08</sys_created_on>
+            <sys_id>d44c12f24f8ca300f20f1b818110c776</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>APIKey</sys_name>
+            <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
+            <sys_update_name>sys_documentation_x_261942_ot_apikey__en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-08-24 19:02:08</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>
