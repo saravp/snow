@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_app_module">
+    <sys_app_module action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <application display_value="OneTrust">3d2b16b24f8ca300f20f1b818110c72f</application>
+        <assessment/>
+        <content_page/>
+        <device_type/>
+        <filter/>
+        <hint/>
+        <homepage/>
+        <image/>
+        <link_type>DIRECT</link_type>
+        <map_page/>
+        <mobile_title>Supprt</mobile_title>
+        <mobile_view_name>Mobile</mobile_view_name>
+        <name/>
+        <order/>
+        <override_menu_roles>false</override_menu_roles>
+        <query>x_261942_ot_SupportPage.do</query>
+        <report/>
+        <roles/>
+        <sys_class_name>sys_app_module</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-09-21 18:53:58</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>98c6ae374f202300f20f1b818110c7c9</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Support</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
+        <sys_update_name>sys_app_module_98c6ae374f202300f20f1b818110c7c9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-09-21 18:56:15</sys_updated_on>
+        <timeline_page/>
+        <title>Support</title>
+        <uncancelable>false</uncancelable>
+        <view_name/>
+        <window_name/>
+    </sys_app_module>
+</record_update>

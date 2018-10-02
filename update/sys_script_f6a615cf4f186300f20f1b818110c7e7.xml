@@ -78,12 +78,12 @@ var location = '';
 
 		//set Values
 		body.type.value = 'Application';
-		
+
 		body.location.value ='';
-		body.organization.Id = "d1cdeed6-8020-4bb3-b21c-288887cd5983";
+		body.organization.Id = "29465c95-5684-454e-856d-80fdaf31cc84";
 		var foo =new otEvaluateLocation();
-    try {	
-  body.location.value = foo.evalLocation(current) + '';  
+    try {
+  body.location.value = foo.evalLocation(current) + '';
   body.name = current.name +'';
   var RestBody = global.JSON.stringify(body);
 	gs.info(RestBody);
@@ -109,10 +109,12 @@ current.update();
 		}
 		else {
 			gs.eventQueue('x_261942_ot.NotifyOwner',current,current.it_application_owner.name,current.name);
-			
-		}
-		
 
+		}
+
+var foo2 =new UpdateAssetCounts();
+						foo2.updateCounts();
+						gs.info('Sync Completed');
 
 })(current, previous);
 ]]></script>
@@ -122,7 +124,7 @@ current.update();
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>f6a615cf4f186300f20f1b818110c7e7</sys_id>
-        <sys_mod_count>19</sys_mod_count>
+        <sys_mod_count>21</sys_mod_count>
         <sys_name>OT_Create_BusinessApplication</sys_name>
         <sys_overrides/>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
@@ -130,7 +132,7 @@ current.update();
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
         <sys_update_name>sys_script_f6a615cf4f186300f20f1b818110c7e7</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-09-13 14:18:07</sys_updated_on>
+        <sys_updated_on>2018-09-26 20:58:20</sys_updated_on>
         <template/>
         <when>async</when>
     </sys_script>

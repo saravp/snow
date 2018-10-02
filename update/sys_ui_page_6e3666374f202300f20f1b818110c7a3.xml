@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description>Support page </description>
+        <direct>false</direct>
+        <endpoint>x_261942_ot_SupportPage.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+ 
+    <head>
+        <title>OneTrust Support Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        </meta>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        </link>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+    </head>
+ 
+    <body>
+		
+ <canvas id="myChart" width="400" height="400"></canvas>
+<script>
+	
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+        <div class="jumbotron text-center" style="background-color: lightgreen;">
+            <h1>OneTrust Support</h1>
+        </div>
+ 
+        <div class="container">
+            <div class="row">
+                <h3>Support Hours</h3>
+                <p>We are here to help to assistt you</p>
+                <p>
+                    <span class="icon-date-time"></span> &#160;
+                    09:00 AM - 5:00 PM
+                </p>
+            </div>
+            <div class="row">
+                <h3>Support Days</h3>
+                <p>
+                    <span class="icon-date-time"></span> &#160;
+                    Monday - Friday
+                </p>
+            </div>
+            <div class="row">
+                <h3>Response Time</h3>
+                <p>
+                    <span class="icon-date-time"></span> &#160;
+                    We'll get back to you as soon as possible in the next 72 business Hours
+                </p>
+            </div>
+            <div class="row">
+                <h3>Contact</h3>
+                <p>
+                    <span class="icon-it"></span> &#160;
+                    Please fell free to reach out to our tech support<br></br>
+                    <span class="icon-phone"></span>&#160;
+                    <a href="+1 (844) 900-0472" style="color:lightgreen;">+1 (844) 900-0472</a><br></br>
+                    <span class="icon-mail"></span>&#160;
+                    <a href="support@onetrust.com" style="color:lightgreen;">suppport@onetrust.com</a><br></br>
+                </p>
+            </div>
+            <div class="row">
+                <h3>Contact Link</h3>
+                <p>Please find the Link below to reach out to us thorough our website</p>
+                <p>
+                    <span class="icon-link"></span>&#160;
+                    <a href="https://www.onetrust.com/company/contact/">Need Help</a>
+                </p>
+            </div>
+        </div>
+    </body>
+</j:jelly>]]></html>
+        <name>SupportPage</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-09-21 18:52:06</sys_created_on>
+        <sys_id>6e3666374f202300f20f1b818110c7a3</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>SupportPage</sys_name>
+        <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
+        <sys_update_name>sys_ui_page_6e3666374f202300f20f1b818110c7a3</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-09-27 20:26:46</sys_updated_on>
+    </sys_ui_page>
+</record_update>
