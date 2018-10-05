@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="OrgTable" max_length="40" name="x_261942_ot_orgtable" type="collection">
+        <element display="true" label="Org name" max_length="40" name="org_name" type="string"/>
+        <element label="Ot ID" max_length="40" name="ot_id" type="string"/>
+        <element label="Parent ID" max_length="40" name="parent_id" type="string"/>
+        <element label="position" max_length="40" name="position" type="string"/>
+        <element attributes="tree_picker=true" label="Parent" max_length="40" name="u_parent" reference="x_261942_ot_orgtable" reference_cascade_rule="restrict" type="reference"/>
+    </element>
+</database>

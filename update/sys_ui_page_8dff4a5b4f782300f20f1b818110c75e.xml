@@ -3,17 +3,18 @@
         <category>general</category>
         <client_script><![CDATA[var app = angular.module('ot-hub', []);
 
-function call(){
-		gs.info('Button Clicked');
-   	gs.eventQueue('x_261942_ot.ot_create');
+		function calli(){
+	
+   
+	
 }
 
+
 app.controller('mainController', function ($scope, $http) {
-	
-	$scope.call = function(){
-		gs.info('Button Clicked');
-   	gs.eventQueue('x_261942_ot.ot_create');
-};
+	$scope.call = function () {
+	console.log("noooooo");
+
+	};
     // setting the variable for our data in that is to be displayed in the Donut chart
 var gr = new GlideRecord('x_261942_ot_assets');
 gr.addQuery('type','Application');
@@ -247,6 +248,7 @@ last_synced = gr.last_synced;
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     </link>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
     <style>
         #myChart {
           width: 100%;
@@ -284,6 +286,25 @@ last_synced = gr.last_synced;
         </style>
 
     <body ng-app="ot-hub" ng-controller="mainController">
+			<script>
+		function calli(){
+	<g:evaluate>
+         gs.eventQueue(eventName, GlideRecordObj, parm1, parm2);
+</g:evaluate>
+	
+}
+	</script>
+		
+		<script>
+
+
+     var prop = '${gs.info("property name")}';
+
+
+</script>
+
+
+		
         <div class="container-fluid">
             <div class="jumbotron" id="jumbotron">
                 <h1 class="ero">OneTrust</h1>
@@ -296,7 +317,7 @@ last_synced = gr.last_synced;
             <div class="row" id="chart">
                 <div class="col-xs-8">
                     <button type="button" class="otbtn" ng-click="call()">Sync Applications</button>
-                    <button type="button" class="otbtn" onclick="call()">Sync Organization</button>
+                    <button type="button" class="otbtn" onclick="calli()">Sync Organization</button>
                     <button type="button" class="otbtn">Get Notifications</button>
                 </div>
 				<br></br>
@@ -319,13 +340,13 @@ last_synced = gr.last_synced;
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-02 14:13:41</sys_created_on>
         <sys_id>8dff4a5b4f782300f20f1b818110c75e</sys_id>
-        <sys_mod_count>24</sys_mod_count>
+        <sys_mod_count>36</sys_mod_count>
         <sys_name>OtHub</sys_name>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
         <sys_policy/>
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
         <sys_update_name>sys_ui_page_8dff4a5b4f782300f20f1b818110c75e</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-02 15:28:43</sys_updated_on>
+        <sys_updated_on>2018-10-05 18:52:57</sys_updated_on>
     </sys_ui_page>
 </record_update>
