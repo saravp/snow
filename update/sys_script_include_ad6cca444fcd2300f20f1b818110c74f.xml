@@ -8,54 +8,74 @@
         <name>ot_create_Ogs</name>
         <script><![CDATA[var ot_create_Ogs = Class.create();
 ot_create_Ogs.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
-   
-    getOrgObj: function () {
-        var sn = new sn_ws.RESTMessageV2();
-        sn.setEndpoint("https://m0ayqnd8l9.execute-api.us-east-1.amazonaws.com/Test");
-        sn.setHttpMethod("GET");
-        sn.setRequestHeader("APIKey", "ccf1be5d04b7f475ec2455ab825aed1a");
-sn.setRequestHeader("user-agent",'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36');
-        sn.setRequestHeader("Accept","application/json");
-         sn.setRequestHeader('Content-Type','application/json');
-        var response = sn.executeAsync();
-        response.waitForResponse(100);
-        httpResponseStatus = response.getStatusCode();
-        var responseBody = JSON.parse(response.getBody());
-        this.flattenOrg(responseBody);
-    },
-   
-    flattenOrg: function(obj) {
-        var gr = new GlideRecord('x_261942_ot_orgtable');
-        gr.newRecord();
-        gr.parent_id = obj.parentId;
-        gr.org_name = obj.name;
-        gr.position = obj.position;
-        gr.ot_id = obj.id;
-//         gr.addQuery('ot_id', obj.parentId);
-//         gr.query();
-//         gr.u_parent = gr.name;
-        gr.insert();
-        if (obj.children && obj.children.length) {
-            for (var i = 0; i < obj.children.length; i++) {
-                this.flattenOrg(obj.children[i]);
-            }
-        }
-       
-    },
-   
-    type: 'ot_create_Ogs'
+	
+	getOrgObj: function () {
+		var sn = new sn_ws.RESTMessageV2();
+		sn.setEndpoint("https://m0ayqnd8l9.execute-api.us-east-1.amazonaws.com/Test");
+		sn.setHttpMethod("GET");
+		sn.setRequestHeader("APIKey", "ccf1be5d04b7f475ec2455ab825aed1a");
+		sn.setRequestHeader("user-agent",'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36');
+		sn.setRequestHeader("Accept","application/json");
+		sn.setRequestHeader('Content-Type','application/json');
+		var response = sn.executeAsync();
+		response.waitForResponse(100);
+		httpResponseStatus = response.getStatusCode();
+		var responseBody = JSON.parse(response.getBody());
+		this.flattenOrg(responseBody);
+		this.populateParents();
+	},
+	
+	flattenOrg: function(obj) {
+		var gr = new GlideRecord('x_261942_ot_orgtable');
+		gr.newRecord();
+		gr.parent_id = obj.parentId;
+		gr.org_name = obj.name;
+		gr.position = obj.position;
+		gr.ot_id = obj.id;
+		gr.insert();
+		if (obj.children && obj.children.length) {
+			for (var i = 0; i < obj.children.length; i++) {
+				this.flattenOrg(obj.children[i]);
+			}
+		}
+		
+	},
+	
+	populateParents: function(obj) {
+		function getParent(val){
+			var gt = new GlideRecord ('x_261942_ot_orgtable');
+			var parent = '';
+			gt.addQuery('ot_id', val);
+			gt.setLimit(1);
+			gt.query();
+			while (gt.next()){
+				parent =  gt.sys_id;
+			}
+			return parent;
+		}
+		
+		var gr = new GlideRecord ('x_261942_ot_orgtable');
+		gr.query();
+		while (gr.next()){
+			gr.u_parent = getParent(gr.parent_id);
+			gr.update();
+		}
+		
+	},
+	
+	type: 'ot_create_Ogs'
 });]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-04 21:53:31</sys_created_on>
         <sys_id>ad6cca444fcd2300f20f1b818110c74f</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>5</sys_mod_count>
         <sys_name>ot_create_Ogs</sys_name>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
         <sys_update_name>sys_script_include_ad6cca444fcd2300f20f1b818110c74f</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-05 13:48:26</sys_updated_on>
+        <sys_updated_on>2018-10-05 20:43:45</sys_updated_on>
     </sys_script_include>
 </record_update>
