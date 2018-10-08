@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_module">
     <sys_ui_module action="INSERT_OR_UPDATE">
         <active>true</active>
-        <application display_value="AssetType">5e05e8e24f40a300f20f1b818110c72e</application>
+        <application/>
         <filter/>
         <name>AssetTypes</name>
         <order/>

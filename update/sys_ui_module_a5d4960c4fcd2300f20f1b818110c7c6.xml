@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_module">
     <sys_ui_module action="INSERT_OR_UPDATE">
         <active>true</active>
-        <application display_value="OrgTable">69d4960c4fcd2300f20f1b818110c7c4</application>
+        <application/>
         <filter/>
         <name>OrgTables</name>
         <order/>
