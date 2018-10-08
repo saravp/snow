@@ -20,7 +20,7 @@
         </filter_condition>
         <is_rest>false</is_rest>
         <message/>
-        <name>Update_application</name>
+        <name>ot_update_business_application</name>
         <order>100</order>
         <priority>100</priority>
         <rest_method/>
@@ -84,7 +84,7 @@
 		body.name = current.name +'';
 		body.location.value ='';
 		body.organization.Id = "cd4b73c9-9a61-43a7-abee-43759f7b3c80";
-		var foo =new otEvaluateLocation();
+		var foo =new otEvaluateHostingLocation();
 		try {
 		body.location.value = foo.evalLocation(current) + '';
 
@@ -110,7 +110,7 @@
 		gs.info(err);
 		}	}
 			else {
-				gs.eventQueue('x_261942_ot.NotifyOwner',current,current.it_application_owner.name,current.name);
+				gs.eventQueue('x_261942_ot.ot_ba_required_fields_notification',current,current.it_application_owner.name,current.name);
 
 			}
 
@@ -123,15 +123,15 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>40c346b64f506300f20f1b818110c708</sys_id>
-        <sys_mod_count>54</sys_mod_count>
-        <sys_name>Update_application</sys_name>
+        <sys_mod_count>57</sys_mod_count>
+        <sys_name>ot_update_business_application</sys_name>
         <sys_overrides/>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
         <sys_policy/>
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
         <sys_update_name>sys_script_40c346b64f506300f20f1b818110c708</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-05 23:06:57</sys_updated_on>
+        <sys_updated_on>2018-10-08 20:23:24</sys_updated_on>
         <template/>
         <when>async</when>
     </sys_script>

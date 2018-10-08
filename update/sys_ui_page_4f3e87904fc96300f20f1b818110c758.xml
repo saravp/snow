@@ -1,46 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
     <sys_ui_page action="INSERT_OR_UPDATE">
         <category>general</category>
-        <client_script><![CDATA[var app = angular.module('angularApp', []);
-app.controller('MainCtrl', function ($scope) {
+        <client_script><![CDATA[var app = angular.module('otSettings', []);
+app.controller('otSettingsCtrl', function ($scope) {
     $scope.apiKeyValue = '';
     $scope.envValue = '';
     $scope.notificationVal = false;
     var insert = true;
-    var api_PV = '';
+    var previousValue = '';
+	var initialSettingsRecord;
     
     $scope.onInitCode = (function () {
-        var gr = new GlideRecord('x_261942_ot_apikey');
-        gr.orderByDesc('sys_created_on');
-        gr.setLimit(1);
-        gr.query();
-        if (gr.next()) {
+        this.initialSettingsRecord = new GlideRecord('x_261942_ot_apikey');
+        this.initialSettingsRecord.orderByDesc('sys_created_on');
+        this.initialSettingsRecord.setLimit(1);
+        this.initialSettingsRecord.query();
+		console.log("initial value record" + JSON.stringify(this.initialSettingsRecord));
+        if (this.initialSettingsRecord.next()) {
             insert = false;
-            $scope.apiKeyValue = gr.apikey;
-            $scope.envValue = gr.url;
-            api_PV = $scope.apiKeyValue;
-            $scope.envValue = gr.url;
-            $scope.notificationVal = gr.notification_s;
+            $scope.apiKeyValue = this.initialSettingsRecord.apikey;
+            $scope.envValue = this.initialSettingsRecord.url;
+            previousValue = $scope.apiKeyValue;
+            $scope.envValue = this.initialSettingsRecord.url;
+            $scope.notificationVal = this.initialSettingsRecord.notification_s;
         }
     })();
     
-    $scope.insertData = function () {
-        if (insert === true && $scope.apiKeyValue && $scope.envValue) {
-            var newRecord = new GlideRecord('x_261942_ot_apikey');
-            newRecord.initialize();
-            newRecord.setValue('apikey', $scope.apiKeyValue);
-            newRecord.setValue('url', $scope.envValue);
-            newRecord.setValue('notification_s', $scope.notificationVal);
-            newRecord.insert();
+    $scope.onSettingSubmit = function () {
+        if (insert && $scope.apiKeyValue && $scope.envValue) {
+            var getSettingsParams = new GlideRecord('x_261942_ot_apikey');
+            getSettingsParams.initialize();
+            getSettingsParams.setValue('apikey', $scope.apiKeyValue);
+            getSettingsParams.setValue('url', $scope.envValue);
+            getSettingsParams.setValue('notification_s', $scope.notificationVal);
+            getSettingsParams.insert();
         } else if ($scope.apiKeyValue && $scope.envValue){
-            var gr = new GlideRecord('x_261942_ot_apikey');
-            gr.addQuery('apikey', api_PV);
-            gr.query();
-            while (gr.next()) {
-                gr.setValue('apikey', $scope.apiKeyValue);
-                gr.setValue('url', $scope.envValue);
-                gr.setValue('notification_s', $scope.notificationVal);
-                gr.update();
+            this.initialSettingsRecord = new GlideRecord('x_261942_ot_apikey');
+			console.log("on submit value record" + JSON.stringify(this.initialSettingsRecord));
+            this.initialSettingsRecord.addQuery('apikey', previousValue);
+            this.initialSettingsRecord.query();
+            while (this.initialSettingsRecord.next()) {
+                this.initialSettingsRecord.setValue('apikey', $scope.apiKeyValue);
+                this.initialSettingsRecord.setValue('url', $scope.envValue);
+                this.initialSettingsRecord.setValue('notification_s', $scope.notificationVal);
+                this.initialSettingsRecord.update();
             }
         } else {
             alert("Please fill both the fields");
@@ -59,97 +62,72 @@ app.controller('MainCtrl', function ($scope) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
     </link>
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"></link>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    </link>
     <style>
-        .ot-settings {
+        .ot-settings__form {
             max-width: 750px;
             padding-top: 30px;
 			font-family: 'Open Sans', sans-serif;
 			font-size: 12px;
         }
+		
+		.ot-settings__primary-btn {
+            margin: 0 0.5rem 0 0.5rem;
+            border-radius: 2rem;
+		    margin-top: 10px;
+			background-color: #1f96db;
+			border-color: #1f96db;
+        }
+		
+		.ot-settings__primary-btn:hover {
+			background-color: #1f96db;
+			border-color: #1f96db;
+        }
+		
+		.ot-settings__primary-btn:active {
+			background-color: #1f96db;
+			border-color: #1f96db;
+			outline-style: none;
+		}
 
-        #body{
-                font-size: 1.2rem;
-				font-family: 'Open Sans', sans-serif;
-            }
+        .ot-settings {
+            font-size: 1.2rem;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .ot-settings__header {
+            padding: 2rem 3rem 2rem 3rem;
+            font-weight: 300;
+        }
     </style>
 
-    <body id="body" ng-app="angularApp">
-        <div ng-controller="MainCtrl">
-
-            <!-- <div id="jumbotron" class="w-100 p-3 h-50 d-inline-block">
-                <h1 style="font-size: 2.5rem">OneTrust</h1>
-                <p style="font-size: 1.2rem">Privacy Mangament Software</p>
-            </div> -->
-<!--             <div class="container" style="margin-top: 5%;">
-                <form name="myForm">
-                    <div class="form-group">
-                        <label for="settingsFormApiKey">ApiKey</label>
-                        <input type="text" class="form-control" name="apiKeyValue" id="settingsFormApiKeyInput"
-                            placeholder="Please Enter ApiKey" ng-model="apiKeyValue" ng-change="onApiKeyChanges()"
-                            ng-value="apiKeyValue" />
-                    </div>
-                    <div class="form-group">
-                        <label for="settingsFormEnvironment">Environment</label>
-                        <input type="text" class="form-control" name="envValue" id="settingsFormEnvironmentInput"
-                            placeholder="Please Enter Environment" ng-model="envValue" ng-value="envValue" ng-change="onEnvChnage(envValue)" />
-                    </div>
-                    <div class="form-group">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="notificationcheck" ng-model="notificationVal"
-                                name="notification" />
-                            <label class="form-check-label" for="notificationcheck" style="margin-left:0.5%;">
-                                Email Notifications
-                            </label>
-                        </div>
-                    </div>
-                    <p>{{notificationVal}}</p>
-                    <div>
-                        <button type="submit" class="btn btn-primary mb-2" style="margin-top: 10px" ng-click="insertData()" onclick="window.location.reload(true);">Submit</button>
-                    </div>
+    <body class="ot-settings" ng-app="otSettings">
+        <div ng-controller="otSettingsCtrl">
+            <h2 class="ot-settings__header">OneTrust Settings</h2>
+            <div class="container ot-settings__form">
+                <form>
+                    <fieldset class="form-group">
+                        <label for="otSettingsApiKey">Api Key</label>
+                        <input type="text" class="form-control" id="otSettingsApiKey" placeholder="Please Enter OneTrust ApiKey"
+                            ng-model="apiKeyValue" ng-change="onApiKeyChanges()" ng-value="apiKeyValue" />
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="otSettingsEnv">Environment URL</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Please Enter OneTrust Environment"
+                            ng-model="envValue" ng-value="envValue" ng-change="onEnvChnage(envValue)" />
+                    </fieldset>
+                    <!-- <div class="checkbox">
+                        <label style="font-weight: bold;">
+                            <input type="checkbox" ng-model="notificationVal" id="notificationcheck" name="emailNotification"
+                                value="notificationVal" />
+                            Email Notification
+                        </label>
+                    </div> -->
+                    <button type="submit" class="btn btn-primary ot-settings__primary-btn" ng-click="onSettingSubmit()"
+                        onclick="window.location.reload(true);">Submit</button>
                 </form>
-            </div> -->
- <div class="container ot-settings">
-    <h2 style="margin-bottom: 2rem;">OneTrust Settings</h2>
-    <form>
-      <fieldset class="form-group">
-        <label for="otSettingsApiKey">Api Key</label>
-        <input type="text" 
-               class="form-control" 
-               id="otSettingsApiKey" 
-               placeholder="Please Enter OneTrust ApiKey" 
-               ng-model="apiKeyValue" 
-               ng-change="onApiKeyChanges()"
-               ng-value="apiKeyValue" />
-      </fieldset>
-      <fieldset class="form-group">
-        <label for="otSettingsEnv">Environment URL</label>
-        <input 
-               type="text" 
-               class="form-control" 
-               id="exampleInputPassword1" 
-               placeholder="Please Enter OneTrust Environment" 
-               ng-model="envValue" ng-value="envValue" 
-               ng-change="onEnvChnage(envValue)"/>
-      </fieldset>
-     <!--  <div class="checkbox">
-        <label style="font-weight: bold;">
-          <input type="checkbox" 
-             ng-model="notificationVal"
-             id="notificationcheck"
-             name="emailNotification"
-             value="notificationVal" 
-             />
-            Email Notification
-        </label>
-      </div> -->
-      <button type="submit" class="btn btn-primary"
-            style="margin-top: 10px" 
-            ng-click="insertData()"     
-            onclick="window.location.reload(true);"
-        >Submit</button>
-    </form>
-</div>
+            </div>
         </div>
     </body>
 </j:jelly>]]></html>
@@ -159,13 +137,13 @@ app.controller('MainCtrl', function ($scope) {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-05 21:20:53</sys_created_on>
         <sys_id>4f3e87904fc96300f20f1b818110c758</sys_id>
-        <sys_mod_count>10</sys_mod_count>
+        <sys_mod_count>27</sys_mod_count>
         <sys_name>Settings</sys_name>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
         <sys_policy/>
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
         <sys_update_name>sys_ui_page_4f3e87904fc96300f20f1b818110c758</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-05 23:04:47</sys_updated_on>
+        <sys_updated_on>2018-10-08 18:56:59</sys_updated_on>
     </sys_ui_page>
 </record_update>

@@ -18,7 +18,7 @@
         <filter_condition/>
         <is_rest>false</is_rest>
         <message/>
-        <name>OT_Create_BusinessApplication</name>
+        <name>ot_create_business_application</name>
         <order>100</order>
         <priority>100</priority>
         <rest_method/>
@@ -81,7 +81,7 @@ var location = '';
 
 		body.location.value ='';
 		body.organization.Id = "cd4b73c9-9a61-43a7-abee-43759f7b3c80";
-		var foo =new otEvaluateLocation();
+		var foo =new otEvaluateHostingLocation();
     try {
   body.location.value = foo.evalLocation(current) + '';
   body.name = current.name +'';
@@ -108,11 +108,11 @@ current.update();
 	}
 		}
 		else {
-			gs.eventQueue('x_261942_ot.NotifyOwner',current,current.it_application_owner.name,current.name);
+			gs.eventQueue('x_261942_ot.ot_ba_required_fields_notification',current,current.it_application_owner.name,current.name);
 
 		}
 
-var foo2 =new UpdateAssetCounts();
+var foo2 =new otUpdateAssetCounts();
 						foo2.updateCounts();
 						gs.info('Sync Completed');
 
@@ -124,15 +124,15 @@ var foo2 =new UpdateAssetCounts();
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>f6a615cf4f186300f20f1b818110c7e7</sys_id>
-        <sys_mod_count>23</sys_mod_count>
-        <sys_name>OT_Create_BusinessApplication</sys_name>
+        <sys_mod_count>27</sys_mod_count>
+        <sys_name>ot_create_business_application</sys_name>
         <sys_overrides/>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
         <sys_policy/>
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
         <sys_update_name>sys_script_f6a615cf4f186300f20f1b818110c7e7</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-05 23:06:25</sys_updated_on>
+        <sys_updated_on>2018-10-08 20:23:04</sys_updated_on>
         <template/>
         <when>async</when>
     </sys_script>

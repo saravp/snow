@@ -26,7 +26,7 @@
         <name>Sync Orgs</name>
         <onclick/>
         <order>100</order>
-        <script><![CDATA[var foo =new getOrgTree();
+        <script><![CDATA[var foo =new otGetOrgGroup();
 foo.getOrgObj();]]></script>
         <show_insert>true</show_insert>
         <show_multiple_update>false</show_multiple_update>
@@ -38,7 +38,7 @@ foo.getOrgObj();]]></script>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>69cd8a844fcd2300f20f1b818110c791</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name>Sync Orgs</sys_name>
         <sys_overrides/>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
@@ -46,7 +46,7 @@ foo.getOrgObj();]]></script>
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
         <sys_update_name>sys_ui_action_69cd8a844fcd2300f20f1b818110c791</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-04 22:00:24</sys_updated_on>
+        <sys_updated_on>2018-10-08 19:32:23</sys_updated_on>
         <table/>
         <ui11_compatible>true</ui11_compatible>
         <ui16_compatible>false</ui16_compatible>

@@ -2,12 +2,12 @@
     <sys_script_include action="INSERT_OR_UPDATE">
         <access>package_private</access>
         <active>true</active>
-        <api_name>x_261942_ot.UpdateAssetCounts</api_name>
+        <api_name>x_261942_ot.otUpdateAssetCounts</api_name>
         <client_callable>false</client_callable>
         <description>Updates Asset count after a create or sync</description>
-        <name>UpdateAssetCounts</name>
-        <script><![CDATA[var UpdateAssetCounts = Class.create();
-UpdateAssetCounts.prototype = {
+        <name>otUpdateAssetCounts</name>
+        <script><![CDATA[var otUpdateAssetCounts = Class.create();
+otUpdateAssetCounts.prototype = {
     initialize: function() {
     },
 updateCounts: function(){
@@ -41,19 +41,19 @@ gr.last_synced = new GlideDateTime();
 
 }
 	},
-    type: 'UpdateAssetCounts'
+    type: 'otUpdateAssetCounts'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-09-12 14:41:33</sys_created_on>
         <sys_id>636513bc4fec6300f20f1b818110c731</sys_id>
-        <sys_mod_count>6</sys_mod_count>
-        <sys_name>UpdateAssetCounts</sys_name>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>otUpdateAssetCounts</sys_name>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
         <sys_update_name>sys_script_include_636513bc4fec6300f20f1b818110c731</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-09-12 15:03:04</sys_updated_on>
+        <sys_updated_on>2018-10-08 19:42:02</sys_updated_on>
     </sys_script_include>
 </record_update>

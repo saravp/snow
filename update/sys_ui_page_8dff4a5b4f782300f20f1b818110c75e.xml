@@ -1,369 +1,354 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
     <sys_ui_page action="INSERT_OR_UPDATE">
         <category>general</category>
-        <client_script><![CDATA[var app = angular.module('ot-hub', []);
+        <client_script><![CDATA[var app = angular.module('ot-dashboard', []);
 
-// function call(){
-    //          console.log(syncApp.guid);
-    //          alert("hi");
-    // }
-    
-    app.controller('mainController', function ($scope, $http) {
-        
-//         $scope.call = function(){
-//             var syncApp = new GlideRecord('cmdb_ci_business_app');
-//             //      syncApp.addQuery('type','guid');
-//             syncApp.query();
-//             if(syncApp.next()){
-//                 console.log(syncApp.name);
-//             }
-//             var hl = new GlideRecord('cmdb_ci_business_app','x_261942_ot_hosting_location');
-//             hl.query();
-//             if(hl.next()){
-//                 console.log(hl.hosting_location);
-//             }
-//         };
-        // setting the variable for our data in that is to be displayed in the Donut chart
-        var gr = new GlideRecord('x_261942_ot_assets');
-        gr.addQuery('type','Application');
-        gr.query();
-        var count = 0;
-        var synced = 0;
-        var last_synced = 0;
-        var total = 0;
-        
-        while (gr.next()) {
-            
-            count = gr.count;
-            synced = gr.synced;
-            last_synced = gr.last_synced;
-            
-        }
-        var data = [count-synced, synced];
-        // calculating the total from the data we provide in the data[]
-        total = parseInt(count) ;
-        // $scope.call = function () {};
-            
-            $scope.getNumberOfApplications = function (chart) {
-                return chart;
-            };
-            
-            // The section deals with the displaying the total no of apps in the center of the donut chart
-            Chart.pluginService.register({
-                beforeDraw: function (chart) {
-                    if (chart.config.options.elements.center) {
-                        //Get ctx from string
-                        var ctx = chart.chart.ctx;
-                        
-                        //Get options from the center object in options
-                        var centerConfig = chart.config.options.elements.center;
-                        var fontStyle = centerConfig.fontStyle || 'Arial';
-                        var txt = centerConfig.text;
-                        var color = centerConfig.color || '#000';
-                        var sidePadding = centerConfig.sidePadding || 20;
-                        var sidePaddingCalculated = (sidePadding / 100) * (chart.innerRadius * 2);
-                        //Start with a base font of 30px
-                        ctx.font = "30px " + fontStyle;
-                        
-                        //Get the width of the string and also the width of the element minus 10 to give it 5px side padding
-                        var stringWidth = ctx.measureText(txt).width;
-                        var elementWidth = (chart.innerRadius * 2) - sidePaddingCalculated;
-                        
-                        // Find out how much the font can grow in width.
-                        var widthRatio = elementWidth / stringWidth;
-                        var newFontSize = Math.floor(30 * widthRatio);
-                        var elementHeight = (chart.innerRadius * 2);
-                        
-                        // Pick a new font size so it will not be larger than the height of label.
-                        var fontSizeToUse = Math.min(newFontSize, elementHeight);
-                        
-                        //Set font settings to draw it correctly.
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'middle';
-                        var centerX = ((chart.chartArea.left + chart.chartArea.right) / 2);
-                        var centerY = ((chart.chartArea.top + chart.chartArea.bottom) / 2);
-                        ctx.font = fontSizeToUse + "px " + fontStyle;
-                        ctx.fillStyle = color;
-                        
-                        //Draw text in center
-                        ctx.fillText(txt, centerX, centerY);
-                    }
-                }
-            });
-            
-            //This section of code is to display the number of apps in the respective segment on the Donut chart
-            
-            Chart.defaults.doughnutLabels = Chart.helpers.clone(Chart.defaults.doughnut);
-            
-            var helpers = Chart.helpers;
-            var defaults = Chart.defaults;
-            
-            Chart.controllers.doughnutLabels = Chart.controllers.doughnut.extend({
-                updateElement: function (arc, index, reset) {
-                    var _this = this;
-                    var chart = _this.chart,
-                    chartArea = chart.chartArea,
-                    opts = chart.options,
-                    animationOpts = opts.animation,
-                    arcOpts = opts.elements.arc,
-                    centerX = (chartArea.left + chartArea.right) / 2,
-                    centerY = (chartArea.top + chartArea.bottom) / 2,
-                    startAngle = opts.rotation, // non reset case handled later
-                    endAngle = opts.rotation, // non reset case handled later
-                    dataset = _this.getDataset(),
-                    circumference = reset && animationOpts.animateRotate ? 0 : arc.hidden ? 0 : _this.calculateCircumference(dataset.data[index]) * (opts.circumference / (2.0 * Math.PI)),
-                    innerRadius = reset && animationOpts.animateScale ? 0 : _this.innerRadius,
-                    outerRadius = reset && animationOpts.animateScale ? 0 : _this.outerRadius,
-                    custom = arc.custom || {},
-                        valueAtIndexOrDefault = helpers.getValueAtIndexOrDefault;
-                        
-                        helpers.extend(arc, {
-                            // Utility
-                            _datasetIndex: _this.index,
-                            _index: index,
-                            
-                            // Desired view properties
-                            _model: {
-                                x: centerX + chart.offsetX,
-                                y: centerY + chart.offsetY,
-                                startAngle: startAngle,
-                                endAngle: endAngle,
-                                circumference: circumference,
-                                outerRadius: outerRadius,
-                                innerRadius: innerRadius,
-                                label: valueAtIndexOrDefault(dataset.label, index, chart.data.labels[index])
-                            },
-                            
-                            draw: function () {
-                                var ctx = this._chart.ctx,
-                                vm = this._view,
-                                sA = vm.startAngle,
-                                eA = vm.endAngle,
-                                opts = this._chart.config.options;
-                                
-                                var labelPos = this.tooltipPosition();
-                                var segmentLabel = $scope.getNumberOfApplications(dataset.data[index]);
-                                
-                                ctx.beginPath();
-                                
-                                ctx.arc(vm.x, vm.y, vm.outerRadius, sA, eA);
-                                ctx.arc(vm.x, vm.y, vm.innerRadius, eA, sA, true);
-                                
-                                ctx.closePath();
-                                ctx.strokeStyle = vm.borderColor;
-                                ctx.lineWidth = vm.borderWidth;
-                                
-                                ctx.fillStyle = vm.backgroundColor;
-                                
-                                ctx.fill();
-                                ctx.lineJoin = 'bevel';
-                                
-                                if (vm.borderWidth) {
-                                    ctx.stroke();
-                                }
-                                
-                                if (vm.circumference > 0.15) { // Trying to hide label when it doesn't fit in segment
-                                    ctx.beginPath();
-                                    ctx.font = helpers.fontString(opts.defaultFontSize, opts.defaultFontStyle, opts.defaultFontFamily);
-                                    ctx.fillStyle = "#fff";
-                                    ctx.textBaseline = "top";
-                                    ctx.textAlign = "center";
-                                    
-                                    ctx.fillText(segmentLabel, labelPos.x, labelPos.y - 5);
-                                    
-                                }
-                            }
-                        });
-                        
-                        var model = arc._model;
-                        model.backgroundColor = custom.backgroundColor ? custom.backgroundColor : valueAtIndexOrDefault(dataset.backgroundColor, index, arcOpts.backgroundColor);
-                        model.hoverBackgroundColor = custom.hoverBackgroundColor ? custom.hoverBackgroundColor : valueAtIndexOrDefault(dataset.hoverBackgroundColor, index, arcOpts.hoverBackgroundColor);
-                        model.borderWidth = custom.borderWidth ? custom.borderWidth : valueAtIndexOrDefault(dataset.borderWidth, index, arcOpts.borderWidth);
-                        model.borderColor = custom.borderColor ? custom.borderColor : valueAtIndexOrDefault(dataset.borderColor, index, arcOpts.borderColor);
-                        
-                        // Set correct angles if not resetting
-                        if (!reset || !animationOpts.animateRotate) {
-                            if (index === 0) {
-                                model.startAngle = opts.rotation;
-                            } else {
-                                model.startAngle = _this.getMeta().data[index - 1]._model.endAngle;
-                            }
-                            
-                            model.endAngle = model.startAngle + model.circumference;
-                        }
-                        
-                        arc.pivot();
-                    }
-                });
-                
-                // This section of code where we specify the type of chart and set the values of the required fields like:
-                // labels and options alignment of them.
-                
-                
-                var config = {
-                    type: 'doughnutLabels',
-                    data: {
-                        labels: [
-                        "Applications Not Synced to OneTrust",
-                        "Applications Synced to OneTrust",
-                        ],
-                        datasets: [{
-                            data: data,
-                            backgroundColor: [
-                            "#343d47",
-                            "#6fbe51",
-                            ],
-//                          circumference: 40,
-                        }],
-                        
-                    },
-                    options: {
-                        maintainAspectRatio : false,
-                        elements: {
-                            center: {
-                                text: "Total Applications: " + total,
-                            }
-                        },
-                        responsive: true,
-                        legend: {
-                            usePointStyle: true,
-                            boxWidth: 15,
-                            position: 'bottom',
-                            //lineWidth: 40,
-                            label: {
-                                generateLabels:  function (chart) {
-                                    chart.legend.afterFit = function () {
-                                        var width = this.width;
-                                        this.lineWidth = this.lineWidth.map(function(){           
-//                                          this.options.labels.boxWidth = 15;
-                                            return width;
-                                        });
-                                        
-                                    };
-                                }
-                            },
-                            onClick: function (e) {
-                                e.stopPropagation();
-                            },
-                        },
-                        title: {
-                            display: true,
-                            text: "Business Applications Overview",
-                            fontSize: 15,
-                            textAlign: 'center',
-                            
-                        },
-                        animation: {
-                            animateScale: true,
-                            animateRotate: true
-                        }
-                    }
-                };
-                
-                var ctx = document.getElementById("myChart").getContext("2d");
-                new Chart(ctx, config);
-                
-            });]]></client_script>
-        <description/>
+app.controller('dashboardController', function ($scope, $http) {
+	
+	//         $scope.call = function(){
+		//             var syncApp = new GlideRecord('cmdb_ci_business_app');
+		//             //      syncApp.addQuery('type','guid');
+		//             syncApp.query();
+		//             if(syncApp.next()){
+			//                 console.log(syncApp.name);
+			//             }
+			//             var hl = new GlideRecord('cmdb_ci_business_app','x_261942_ot_hosting_location');
+			//             hl.query();
+			//             if(hl.next()){
+				//                 console.log(hl.hosting_location);
+				//             }
+				//         };
+				// setting the variable for our data in that is to be displayed in the Donut chart
+				var gr = new GlideRecord('x_261942_ot_assets');
+				gr.addQuery('type','Application');
+				gr.query();
+				var count = 0;
+				var synced = 0;
+				var last_synced = 0;
+				var total = 0;
+				
+				while (gr.next()) {
+					
+					count = gr.count;
+					synced = gr.synced;
+					last_synced = gr.last_synced;
+					
+				}
+				var data = [count-synced, synced];
+				// calculating the total from the data we provide in the data[]
+				total = parseInt(count) ;
+				// $scope.call = function () {};
+					
+					$scope.getNumberOfApplications = function (chart) {
+						return chart;
+					};
+					
+					// The section deals with the displaying the total no of apps in the center of the donut chart
+					Chart.pluginService.register({
+						beforeDraw: function (chart) {
+							if (chart.config.options.elements.center) {
+								//Get ctx from string
+								var ctx = chart.chart.ctx;
+								
+								//Get options from the center object in options
+								var centerConfig = chart.config.options.elements.center;
+								var fontStyle = centerConfig.fontStyle || 'Arial';
+								var txt = centerConfig.text;
+								var color = centerConfig.color || '#000';
+								var sidePadding = centerConfig.sidePadding || 20;
+								var sidePaddingCalculated = (sidePadding / 100) * (chart.innerRadius * 2);
+								//Start with a base font of 30px
+								ctx.font = "30px " + fontStyle;
+								
+								//Get the width of the string and also the width of the element minus 10 to give it 5px side padding
+								var stringWidth = ctx.measureText(txt).width;
+								var elementWidth = (chart.innerRadius * 2) - sidePaddingCalculated;
+								
+								// Find out how much the font can grow in width.
+								var widthRatio = elementWidth / stringWidth;
+								var newFontSize = Math.floor(30 * widthRatio);
+								var elementHeight = (chart.innerRadius * 2);
+								
+								// Pick a new font size so it will not be larger than the height of label.
+								var fontSizeToUse = Math.min(newFontSize, elementHeight);
+								
+								//Set font settings to draw it correctly.
+								ctx.textAlign = 'center';
+								ctx.textBaseline = 'middle';
+								var centerX = ((chart.chartArea.left + chart.chartArea.right) / 2);
+								var centerY = ((chart.chartArea.top + chart.chartArea.bottom) / 2);
+								ctx.font = fontSizeToUse + "px " + fontStyle;
+								ctx.fillStyle = color;
+								
+								//Draw text in center
+								ctx.fillText(txt, centerX, centerY);
+							}
+						}
+					});
+					
+					//This section of code is to display the number of apps in the respective segment on the Donut chart
+					
+					Chart.defaults.doughnutLabels = Chart.helpers.clone(Chart.defaults.doughnut);
+					
+					var helpers = Chart.helpers;
+					var defaults = Chart.defaults;
+					
+					Chart.controllers.doughnutLabels = Chart.controllers.doughnut.extend({
+						updateElement: function (arc, index, reset) {
+							var _this = this;
+							var chart = _this.chart,
+							chartArea = chart.chartArea,
+							opts = chart.options,
+							animationOpts = opts.animation,
+							arcOpts = opts.elements.arc,
+							centerX = (chartArea.left + chartArea.right) / 2,
+							centerY = (chartArea.top + chartArea.bottom) / 2,
+							startAngle = opts.rotation, // non reset case handled later
+							endAngle = opts.rotation, // non reset case handled later
+							dataset = _this.getDataset(),
+							circumference = reset && animationOpts.animateRotate ? 0 : arc.hidden ? 0 : _this.calculateCircumference(dataset.data[index]) * (opts.circumference / (2.0 * Math.PI)),
+							innerRadius = reset && animationOpts.animateScale ? 0 : _this.innerRadius,
+							outerRadius = reset && animationOpts.animateScale ? 0 : _this.outerRadius,
+							custom = arc.custom || {},
+								valueAtIndexOrDefault = helpers.getValueAtIndexOrDefault;
+								
+								helpers.extend(arc, {
+									// Utility
+									_datasetIndex: _this.index,
+									_index: index,
+									
+									// Desired view properties
+									_model: {
+										x: centerX + chart.offsetX,
+										y: centerY + chart.offsetY,
+										startAngle: startAngle,
+										endAngle: endAngle,
+										circumference: circumference,
+										outerRadius: outerRadius,
+										innerRadius: innerRadius,
+										label: valueAtIndexOrDefault(dataset.label, index, chart.data.labels[index])
+									},
+									
+									draw: function () {
+										var ctx = this._chart.ctx,
+										vm = this._view,
+										sA = vm.startAngle,
+										eA = vm.endAngle,
+										opts = this._chart.config.options;
+										
+										var labelPos = this.tooltipPosition();
+										var segmentLabel = $scope.getNumberOfApplications(dataset.data[index]);
+										
+										ctx.beginPath();
+										
+										ctx.arc(vm.x, vm.y, vm.outerRadius, sA, eA);
+										ctx.arc(vm.x, vm.y, vm.innerRadius, eA, sA, true);
+										
+										ctx.closePath();
+										ctx.strokeStyle = vm.borderColor;
+										ctx.lineWidth = vm.borderWidth;
+										
+										ctx.fillStyle = vm.backgroundColor;
+										
+										ctx.fill();
+										ctx.lineJoin = 'bevel';
+										
+										if (vm.borderWidth) {
+											ctx.stroke();
+										}
+										
+										if (vm.circumference > 0.15) { // Trying to hide label when it doesn't fit in segment
+											ctx.beginPath();
+											ctx.font = helpers.fontString(opts.defaultFontSize, opts.defaultFontStyle, opts.defaultFontFamily);
+											ctx.fillStyle = "#fff";
+											ctx.textBaseline = "top";
+											ctx.textAlign = "center";
+											
+											ctx.fillText(segmentLabel, labelPos.x, labelPos.y - 5);
+											
+										}
+									}
+								});
+								
+								var model = arc._model;
+								model.backgroundColor = custom.backgroundColor ? custom.backgroundColor : valueAtIndexOrDefault(dataset.backgroundColor, index, arcOpts.backgroundColor);
+								model.hoverBackgroundColor = custom.hoverBackgroundColor ? custom.hoverBackgroundColor : valueAtIndexOrDefault(dataset.hoverBackgroundColor, index, arcOpts.hoverBackgroundColor);
+								model.borderWidth = custom.borderWidth ? custom.borderWidth : valueAtIndexOrDefault(dataset.borderWidth, index, arcOpts.borderWidth);
+								model.borderColor = custom.borderColor ? custom.borderColor : valueAtIndexOrDefault(dataset.borderColor, index, arcOpts.borderColor);
+								
+								// Set correct angles if not resetting
+								if (!reset || !animationOpts.animateRotate) {
+									if (index === 0) {
+										model.startAngle = opts.rotation;
+									} else {
+										model.startAngle = _this.getMeta().data[index - 1]._model.endAngle;
+									}
+									
+									model.endAngle = model.startAngle + model.circumference;
+								}
+								
+								arc.pivot();
+							}
+						});
+						
+						// This section of code where we specify the type of chart and set the values of the required fields like:
+						// labels and options alignment of them.
+						
+						
+						var config = {
+							type: 'doughnutLabels',
+							data: {
+								labels: [
+								"Applications Not Synced to OneTrust",
+								"Applications Synced to OneTrust",
+								],
+								datasets: [{
+									data: data,
+									backgroundColor: [
+									"#343d47",
+									"#6fbe51",
+									],
+								}],
+								
+							},
+							options: {
+								maintainAspectRatio : false,
+								elements: {
+									center: {
+										text: "Total Applications: " + total,
+									}
+								},
+								responsive: true,
+								legend: {
+									usePointStyle: true,
+									boxWidth: 15,
+									position: 'bottom',
+									label: {
+										generateLabels:  function (chart) {
+											chart.legend.afterFit = function () {
+												var width = this.width;
+												this.lineWidth = this.lineWidth.map(function(){
+													return width;
+												});
+												
+											};
+										}
+									},
+									onClick: function (e) {
+										e.stopPropagation();
+									},
+								},
+								title: {
+									display: true,
+									text: "Business Applications Overview",
+									fontSize: 15,
+									textAlign: 'center',
+									
+								},
+								animation: {
+									animateScale: true,
+									animateRotate: true
+								}
+							}
+						};
+						
+						var ctx = document.getElementById("otDonutChart").getContext("2d");
+						new Chart(ctx, config);
+						
+					});]]></client_script>
+        <description>This is the Dashboard view of Applications</description>
         <direct>false</direct>
-        <endpoint>x_261942_ot_OtHub.do</endpoint>
+        <endpoint>x_261942_ot_Dashboard.do</endpoint>
         <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
 <j:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    </link>
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"></link>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+
     <style>
-        #myChart {
-          width: 100%;
-          height: 50%;
-          border-color: 1px solid #DDDDDD;
-          <!-- width: 500px;
-          height: 250px; -->
-          border: 1px solid #DDDDDD;
-          margin-top: 3rem;
-		  font-family: 'Open Sans', sans-serif;
-		  padding: 1.5rem;
+        #otDonutChart {
+			width: 100%;
+			height: 50%;
+			border-color: 1px solid #DDDDDD;
+			border: 1px solid #DDDDDD;
+			margin-top: 3rem;
+			font-family: 'Open Sans', sans-serif;
+			padding: 1.5rem;
         }
-            #chart {
-                margin: auto;
-                width: 50%;
-                padding: 10px;
-            }
-            .ot-banner {
-                text-align: center;
-                background-color: #6fbe51;
-                height:20%;
-                color: #ffffff;
-				font-family: 'Open Sans', sans-serif;
-            }
-            .ot-banner__heading {
-                font-size: 40px;
-				font-family: 'Open Sans', sans-serif;
-            }
-            .ot-banner__sub-heading {
-                font-size: 12px;
-				font-family: 'Open Sans', sans-serif;
-            }
-            .btn-space {
-                margin-right: 5px;
-            }
-        
-        h1.ero { /* 1 priority score, not enough to override Bootstrap jumbotron definition */
-  line-height: 1;
-        font-size: 30px;
-  color: inherit;
-}
-        button.otbtn {
-         
-    border: none;
-    background-color: #008CBA;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
-}
+		.ot-dashboard__chart {
+			margin: auto;
+			width: 50%;
+			padding: 10px;
+		}
+		.ot-banner {
+			text-align: center;
+			background-color: #6fbe51;
+			height: 20%;
+			color: #ffffff;
+			font-family: 'Open Sans', sans-serif;
+		}
+		.ot-banner__heading {
+			font-size: 40px;
+			font-family: 'Open Sans', sans-serif;
+		}
+		.ot-banner__sub-heading {
+			font-size: 12px;
+			font-family: 'Open Sans', sans-serif;
+		}
+        .ot-dashboard__btn {
+            display: flex;
+            justify-content: center;
+        }
+        .ot-dashboard__primary-btn {
+            margin: 0 0.5rem 0 0.5rem;
+            border-radius: 2rem;
+			background-color: #1f96db;
+			border-color: #1f96db;
+        }
+		.ot-dashboard__primary-btn:hover {
+			background-color: #1f96db;
+			border-color: #1f96db;
+        }
         </style>
 
-    <body ng-app="ot-hub" ng-controller="mainController">
+    <body ng-app="ot-dashboard" ng-controller="dashboardController">
         <div>
             <div class="ot-banner" id="ot-banner">
                 <h1 class="ot-banner__heading">OneTrust</h1>
                 <p class="ot-banner__sub-heading">Privacy Mangament Software</p>
             </div>
-                <div id="chart" class="row-xs-12">
-                    <canvas id="myChart">Summary Of the Business Applications</canvas>
+            <div id="chart" class="ot-dashboard__chart row-xs-12">
+                <canvas id="otDonutChart">Summary Of the Business Applications</canvas>
             </div><br /><br />
-            <div style="display: flex;justify-content: center;align-item: center;">
-                    <p style="color: Grey;">Last Sync Time : Just now</p>
+            <div class="ot-dashboard__btn">
+                <p style="color: Grey;">Last Sync Time : Just now</p>
             </div>
-                <div style="display: flex;justify-content: center;align-item: center;">
-                    <button type="button" class="btn btn-primary" 
-                            style="margin: 0 0.5rem 0 0.5rem; border-radius: 2rem;" ng-click="call()">Sync Applications</button>
-                    <button type="button" class="btn btn-primary" 
-                            style="margin: 0 0.5rem 0 0.5rem; border-radius: 2rem;" ng-click="call()">Sync Organization</button>
-                    <button type="button" class="btn btn-primary"
-                            style="margin: 0 0.5rem 0 0.5rem; border-radius: 2rem;" >Get Notifications</button>
-                </div>
+            <div class="ot-dashboard__btn">
+                <button type="button" class="btn btn-primary ot-dashboard__primary-btn"
+                    ng-click="call()">Sync Applications</button>
+                <button type="button" class="btn btn-primary ot-dashboard__primary-btn"
+                    ng-click="call()">Sync Organization</button>
+                <button type="button" class="btn btn-primary ot-dashboard__primary-btn">
+                    Email Notifications</button>
+            </div>
         </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
     </body>
-</j:jelly>
-]]></html>
-        <name>OtHub</name>
+</j:jelly>]]></html>
+        <name>Dashboard</name>
         <processing_script/>
         <sys_class_name>sys_ui_page</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-02 14:13:41</sys_created_on>
         <sys_id>8dff4a5b4f782300f20f1b818110c75e</sys_id>
-        <sys_mod_count>53</sys_mod_count>
-        <sys_name>OtHub</sys_name>
+        <sys_mod_count>74</sys_mod_count>
+        <sys_name>Dashboard</sys_name>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
         <sys_policy/>
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
         <sys_update_name>sys_ui_page_8dff4a5b4f782300f20f1b818110c75e</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-05 23:35:58</sys_updated_on>
+        <sys_updated_on>2018-10-08 18:35:06</sys_updated_on>
     </sys_ui_page>
 </record_update>

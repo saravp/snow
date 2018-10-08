@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="HostingLocation" max_length="40" name="x_261942_ot_hostinglocation" type="collection">
-        <element label="Id" max_length="40" name="id" type="string"/>
-        <element label="Name" max_length="40" name="name" type="string"/>
-    </element>
-</database>

@@ -2,12 +2,12 @@
     <sys_script_include action="INSERT_OR_UPDATE">
         <access>package_private</access>
         <active>true</active>
-        <api_name>x_261942_ot.ot_create_Ogs</api_name>
+        <api_name>x_261942_ot.otGetOrgGroup</api_name>
         <client_callable>true</client_callable>
         <description/>
-        <name>ot_create_Ogs</name>
-        <script><![CDATA[var ot_create_Ogs = Class.create();
-ot_create_Ogs.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+        <name>otGetOrgGroup</name>
+        <script><![CDATA[var otGetOrgGroup = Class.create();
+otGetOrgGroup.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
 	
 	getOrgObj: function () {
 		var sn = new sn_ws.RESTMessageV2();
@@ -63,19 +63,19 @@ ot_create_Ogs.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
 		
 	},
 	
-	type: 'ot_create_Ogs'
+	type: 'otGetOrgGroup'
 });]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-04 21:53:31</sys_created_on>
         <sys_id>ad6cca444fcd2300f20f1b818110c74f</sys_id>
-        <sys_mod_count>5</sys_mod_count>
-        <sys_name>ot_create_Ogs</sys_name>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>otGetOrgGroup</sys_name>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
         <sys_update_name>sys_script_include_ad6cca444fcd2300f20f1b818110c74f</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-05 20:43:45</sys_updated_on>
+        <sys_updated_on>2018-10-08 19:28:38</sys_updated_on>
     </sys_script_include>
 </record_update>

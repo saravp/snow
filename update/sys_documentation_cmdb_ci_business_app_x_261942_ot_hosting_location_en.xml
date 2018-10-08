@@ -10,8 +10,8 @@
             <plural>Hosting Locations</plural>
             <sys_class_name>sys_documentation</sys_class_name>
             <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2018-09-12 18:18:44</sys_created_on>
-            <sys_id>c288800d4f60a300f20f1b818110c77a</sys_id>
+            <sys_created_on>2018-10-08 16:09:19</sys_created_on>
+            <sys_id>a7342dd14f412300f20f1b818110c72d</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_name>Hosting Location</sys_name>
             <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
@@ -19,7 +19,7 @@
             <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
             <sys_update_name>sys_documentation_cmdb_ci_business_app_x_261942_ot_hosting_location_en</sys_update_name>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-09-12 18:18:44</sys_updated_on>
+            <sys_updated_on>2018-10-08 16:09:19</sys_updated_on>
             <url/>
             <url_target/>
         </sys_documentation>
