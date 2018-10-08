@@ -5,6 +5,25 @@
             <element>type</element>
             <hint/>
             <inactive>false</inactive>
+            <label>Website</label>
+            <language>en</language>
+            <name>x_261942_ot_assets</name>
+            <sequence/>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2018-10-08 15:50:48</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>bfdf1ddd4f012300f20f1b818110c7ee</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2018-10-08 15:50:48</sys_updated_on>
+            <value>Website</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>type</element>
+            <hint/>
+            <inactive>false</inactive>
             <label>Application</label>
             <language>en</language>
             <name>x_261942_ot_assets</name>
@@ -18,44 +37,6 @@
             <sys_updated_by>admin</sys_updated_by>
             <sys_updated_on>2018-09-04 18:23:45</sys_updated_on>
             <value>Application</value>
-        </sys_choice>
-        <sys_choice action="INSERT_OR_UPDATE">
-            <dependent_value/>
-            <element>type</element>
-            <hint/>
-            <inactive>true</inactive>
-            <label>HardDisk</label>
-            <language>en</language>
-            <name>x_261942_ot_assets</name>
-            <sequence>0</sequence>
-            <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2018-08-27 05:01:53</sys_created_on>
-            <sys_domain>global</sys_domain>
-            <sys_domain_path>/</sys_domain_path>
-            <sys_id>ddb8f2e34f802300f20f1b818110c718</sys_id>
-            <sys_mod_count>1</sys_mod_count>
-            <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-09-04 18:23:45</sys_updated_on>
-            <value>harddisk</value>
-        </sys_choice>
-        <sys_choice action="INSERT_OR_UPDATE">
-            <dependent_value/>
-            <element>type</element>
-            <hint/>
-            <inactive>true</inactive>
-            <label>Choice 2</label>
-            <language>en</language>
-            <name>x_261942_ot_assets</name>
-            <sequence>1</sequence>
-            <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2018-08-27 05:01:53</sys_created_on>
-            <sys_domain>global</sys_domain>
-            <sys_domain_path>/</sys_domain_path>
-            <sys_id>11b8f2e34f802300f20f1b818110c71a</sys_id>
-            <sys_mod_count>1</sys_mod_count>
-            <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-09-04 18:23:45</sys_updated_on>
-            <value>Choice 2</value>
         </sys_choice>
         <sys_choice action="INSERT_OR_UPDATE">
             <dependent_value/>
@@ -75,25 +56,6 @@
             <sys_updated_by>admin</sys_updated_by>
             <sys_updated_on>2018-09-04 18:23:45</sys_updated_on>
             <value>Vendor</value>
-        </sys_choice>
-        <sys_choice action="INSERT_OR_UPDATE">
-            <dependent_value/>
-            <element>type</element>
-            <hint/>
-            <inactive>true</inactive>
-            <label>Choice 3</label>
-            <language>en</language>
-            <name>x_261942_ot_assets</name>
-            <sequence>2</sequence>
-            <sys_created_by>admin</sys_created_by>
-            <sys_created_on>2018-08-27 05:01:53</sys_created_on>
-            <sys_domain>global</sys_domain>
-            <sys_domain_path>/</sys_domain_path>
-            <sys_id>9db8f2e34f802300f20f1b818110c71a</sys_id>
-            <sys_mod_count>1</sys_mod_count>
-            <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-09-04 18:23:45</sys_updated_on>
-            <value>Choice 3</value>
         </sys_choice>
         <sys_choice action="INSERT_OR_UPDATE">
             <dependent_value/>
@@ -128,10 +90,10 @@
             <sys_domain>global</sys_domain>
             <sys_domain_path>/</sys_domain_path>
             <sys_id>29fcbad24f502300f20f1b818110c7db</sys_id>
-            <sys_mod_count>0</sys_mod_count>
+            <sys_mod_count>1</sys_mod_count>
             <sys_updated_by>admin</sys_updated_by>
-            <sys_updated_on>2018-09-04 18:23:45</sys_updated_on>
-            <value>physical storage</value>
+            <sys_updated_on>2018-10-08 15:51:44</sys_updated_on>
+            <value>Physical Storage</value>
         </sys_choice>
         <sys_choice_set action="INSERT_OR_UPDATE">
             <element>type</element>
