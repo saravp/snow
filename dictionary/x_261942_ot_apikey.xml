@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element label="APIKey" max_length="40" name="x_261942_ot_apikey" type="collection">
         <element label="APIKey" max_length="40" name="apikey" type="string"/>
+        <element label="Notification's" max_length="40" name="notification_s" type="boolean"/>
         <element label="URL" max_length="500" name="url" type="string"/>
     </element>
 </database>
