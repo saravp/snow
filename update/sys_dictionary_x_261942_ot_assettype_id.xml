@@ -53,15 +53,15 @@
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-08-23 15:42:46</sys_created_on>
-        <sys_id>73d4aca24f40a300f20f1b818110c749</sys_id>
+        <sys_id>e5f696654f012300f20f1b818110c719</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_name>id</sys_name>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
         <sys_policy/>
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
         <sys_update_name>sys_dictionary_x_261942_ot_assettype_id</sys_update_name>
-        <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-08-23 15:42:46</sys_updated_on>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2018-10-09 14:29:28</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>

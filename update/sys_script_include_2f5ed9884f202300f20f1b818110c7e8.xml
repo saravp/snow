@@ -7,9 +7,10 @@
         <description>Script to find assets that are created in SNOW and dont exist in OT. Makes API call to create in OT get a guid back and update guid in SNOW. </description>
         <name>otCreateBusinessApplication</name>
         <script><![CDATA[var otCreateBusinessApplication = Class.create();
-otCreateBusinessApplication.prototype = {
-	initialize: function() {
-	},
+otCreateBusinessApplication.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+// otCreateBusinessApplication.prototype = {
+// 	initialize: function() {
+// 	},
 	createAssets: function(){
 		gs.info('Sync Initiated');
 		
@@ -20,7 +21,7 @@ otCreateBusinessApplication.prototype = {
 		gr2.addEncodedQuery(querystring2);
 		gr2.query();
 		while(gr2.next()) {
-			gs.eventQueue('x_261942_ot.ot_ba_required_fields_notification',gr2,gr2.it_application_owner.email,gr2.name);
+			gs.eventQueue('x_261942_ot.ot_ba_required_fields_notifi', gr2, gr2.it_application_owner.email,gr2.name);
 		}
 		
 		var apikey;
@@ -109,18 +110,18 @@ otCreateBusinessApplication.prototype = {
 					},
 					
 					type: 'otCreateBusinessApplication'
-				};]]></script>
+				});]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-09-09 22:05:01</sys_created_on>
         <sys_id>2f5ed9884f202300f20f1b818110c7e8</sys_id>
-        <sys_mod_count>30</sys_mod_count>
+        <sys_mod_count>33</sys_mod_count>
         <sys_name>otCreateBusinessApplication</sys_name>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
         <sys_update_name>sys_script_include_2f5ed9884f202300f20f1b818110c7e8</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-08 20:22:06</sys_updated_on>
+        <sys_updated_on>2018-10-09 17:58:05</sys_updated_on>
     </sys_script_include>
 </record_update>

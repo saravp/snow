@@ -23,7 +23,7 @@
         <digest_text/>
         <digestable>false</digestable>
         <event_name>x_261942_ot.ot_ba_required_fields_notifi</event_name>
-        <event_parm_1>false</event_parm_1>
+        <event_parm_1>true</event_parm_1>
         <event_parm_2>false</event_parm_2>
         <exclude_delegates>false</exclude_delegates>
         <force_delivery>false</force_delivery>
@@ -36,6 +36,7 @@
         <mandatory>false</mandatory>
         <message/>
         <message_html><![CDATA[<style type="text/css"><!--
+<span id="__caret">_</span><!--
 <span id="__caret">_</span><!--
 �<span id="__caret">_</span><!--
 <span id="__caret">_</span>�<span id="__caret">_</span>�<span id="__caret">_</span>�<span id="__caret">_</span>�<span id="__caret">_</span>�<span id="__caret">_</span>�<span id="__caret">_</span>�<span id="__caret">_</span><!--
@@ -181,9 +182,9 @@
 <!-- /spacing -->
 <tr>
 <td style="font-family: Helvetica, arial, sans-serif; font-size: 14px; color: #95a5a6; line-height: 25px;"><br />
-<p style="padding-left: 3rem; margin-right: 3rem;">Hi Blake,</p>
+<p style="padding-left: 3rem; margin-right: 3rem;">Hi ${event.parm1},</p>
 <br />
-<p style="padding-left: 3rem; margin-right: 3rem;">Please update the Hosting Location for <strong>Atlassian</strong> in Business Applications.</p>
+<p style="padding-left: 3rem; margin-right: 3rem;">Please update the Hosting Location for <strong>${event.parm2}</strong> in Business Applications.</p>
 <br />
 <p style="padding-left: 3rem; margin-right: 3rem;">Thanks, <br /> Privacy Team</p>
 </td>
@@ -239,7 +240,7 @@
         <push_message_only>false</push_message_only>
         <recipient_fields/>
         <recipient_groups/>
-        <recipient_users>434a2fe84fe46300f20f1b818110c7c0</recipient_users>
+        <recipient_users>87620fa14f812300f20f1b818110c7ae,112d97354f0d2300f20f1b818110c7f6</recipient_users>
         <reply_to/>
         <send_self>true</send_self>
         <sms_alternate/>
@@ -252,7 +253,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>7962efa44fe46300f20f1b818110c777</sys_id>
-        <sys_mod_count>17</sys_mod_count>
+        <sys_mod_count>20</sys_mod_count>
         <sys_name>otNotifyMissingLocation</sys_name>
         <sys_overrides/>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
@@ -260,7 +261,7 @@
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
         <sys_update_name>sysevent_email_action_7962efa44fe46300f20f1b818110c777</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-08 21:10:52</sys_updated_on>
+        <sys_updated_on>2018-10-10 14:48:56</sys_updated_on>
         <sys_version>2</sys_version>
         <template display_value="Unsubscribe and Preferences">7ed0481f3b0b2200c869c2c703efc487</template>
         <type>email</type>

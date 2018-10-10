@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element audit="true" extends="cmdb_ci" label="Business Application" max_length="40" name="cmdb_ci_business_app" sizeclass="16" type="collection">
+    <element audit="true" extends="cmdb_ci" label="Business Application" max_length="40" name="cmdb_ci_business_app" sizeclass="1" type="collection">
         <element attributes="synchronizePartitions=true" label="OneTrust Identifier" max_length="40" name="x_261942_ot_guid" read_only="true" type="string"/>
         <element label="Hosting Location" max_length="32" name="x_261942_ot_hosting_location" reference="core_country" type="reference"/>
         <element attributes="tree_picker=true" label="OneTrust Organization Group" max_length="40" name="x_261942_ot_ot_org_groups" reference="x_261942_ot_orgtable" reference_cascade_rule="restrict" type="reference"/>

@@ -17,12 +17,14 @@ app.controller('otSettingsCtrl', function ($scope) {
         this.initialSettingsRecord.query();
 		console.log("initial value record" + JSON.stringify(this.initialSettingsRecord));
         if (this.initialSettingsRecord.next()) {
+			var g_form = new GlideForm();
             insert = false;
             $scope.apiKeyValue = this.initialSettingsRecord.apikey;
             $scope.envValue = this.initialSettingsRecord.url;
             previousValue = $scope.apiKeyValue;
             $scope.envValue = this.initialSettingsRecord.url;
-            $scope.notificationVal = this.initialSettingsRecord.notification_s;
+//             $scope.notificationVal = this.initialSettingsRecord.notification_s;
+			g_form.setValue('notificationVal', this.initialSettingsRecord.notification_s);
         }
     })();
     
@@ -114,16 +116,16 @@ app.controller('otSettingsCtrl', function ($scope) {
                     </fieldset>
                     <fieldset class="form-group">
                         <label for="otSettingsEnv">Environment URL</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Please Enter OneTrust Environment"
+                        <input type="url" class="form-control" id="exampleInputPassword1" placeholder="Please Enter OneTrust Environment"
                             ng-model="envValue" ng-value="envValue" ng-change="onEnvChnage(envValue)" />
                     </fieldset>
-                    <!-- <div class="checkbox">
+                    <div class="checkbox">
                         <label style="font-weight: bold;">
-                            <input type="checkbox" ng-model="notificationVal" id="notificationcheck" name="emailNotification"
+                            <input type="checkbox" ng-checked="notificationVal" ng-model="notificationVal" id="notificationcheck" name="emailNotification"
                                 value="notificationVal" />
                             Email Notification
                         </label>
-                    </div> -->
+                    </div>
                     <button type="submit" class="btn btn-primary ot-settings__primary-btn" ng-click="onSettingSubmit()"
                         onclick="window.location.reload(true);">Submit</button>
                 </form>
@@ -137,13 +139,13 @@ app.controller('otSettingsCtrl', function ($scope) {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-05 21:20:53</sys_created_on>
         <sys_id>4f3e87904fc96300f20f1b818110c758</sys_id>
-        <sys_mod_count>27</sys_mod_count>
+        <sys_mod_count>34</sys_mod_count>
         <sys_name>Settings</sys_name>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
         <sys_policy/>
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
         <sys_update_name>sys_ui_page_4f3e87904fc96300f20f1b818110c758</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-08 18:56:59</sys_updated_on>
+        <sys_updated_on>2018-10-10 17:38:54</sys_updated_on>
     </sys_ui_page>
 </record_update>

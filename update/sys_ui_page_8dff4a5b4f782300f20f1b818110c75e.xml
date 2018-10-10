@@ -5,20 +5,8 @@
 
 app.controller('dashboardController', function ($scope, $http) {
 	
-	//         $scope.call = function(){
-		//             var syncApp = new GlideRecord('cmdb_ci_business_app');
-		//             //      syncApp.addQuery('type','guid');
-		//             syncApp.query();
-		//             if(syncApp.next()){
-			//                 console.log(syncApp.name);
-			//             }
-			//             var hl = new GlideRecord('cmdb_ci_business_app','x_261942_ot_hosting_location');
-			//             hl.query();
-			//             if(hl.next()){
-				//                 console.log(hl.hosting_location);
-				//             }
-				//         };
 				// setting the variable for our data in that is to be displayed in the Donut chart
+	
 				var gr = new GlideRecord('x_261942_ot_assets');
 				gr.addQuery('type','Application');
 				gr.query();
@@ -31,7 +19,7 @@ app.controller('dashboardController', function ($scope, $http) {
 					
 					count = gr.count;
 					synced = gr.synced;
-					last_synced = gr.last_synced;
+					$scope.last_synced = gr.last_synced; // need to work
 					
 				}
 				var data = [count-synced, synced];
@@ -254,6 +242,33 @@ app.controller('dashboardController', function ($scope, $http) {
 						
 						var ctx = document.getElementById("otDonutChart").getContext("2d");
 						new Chart(ctx, config);
+	
+	$scope.syncOrganizations = function () {
+		var syncOrgGlideAjax = new GlideAjax('otGetOrgGroup');
+		syncOrgGlideAjax.addParam('sysparm_name', 'getOrgObj');
+		syncOrgGlideAjax.getXML(ajaxResponse);
+		
+	};
+	
+	function ajaxResponse(response) {
+		window.location.reload(true);
+	}
+	
+	$scope.syncBusinessApp = function () {
+		var synBusinessAppGlideAjax = new GlideAjax('otCreateBusinessApplication');
+		synBusinessAppGlideAjax.addParam('sysparm_name', 'createAssets');
+		synBusinessAppGlideAjax.getXML(assestAjaxResponse);
+	};
+	
+	function assestAjaxResponse(response) {
+		console.log("response ajax from apps"+ JSON.stringify(response));
+	}
+	
+	$scope.getEmailNotifications = function () {
+		console.log("in email notification");
+	};
+	
+	
 						
 					});]]></client_script>
         <description>This is the Dashboard view of Applications</description>
@@ -266,7 +281,7 @@ app.controller('dashboardController', function ($scope, $http) {
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
-
+	
     <style>
         #otDonutChart {
 			width: 100%;
@@ -323,14 +338,15 @@ app.controller('dashboardController', function ($scope, $http) {
                 <canvas id="otDonutChart">Summary Of the Business Applications</canvas>
             </div><br /><br />
             <div class="ot-dashboard__btn">
-                <p style="color: Grey;">Last Sync Time : Just now</p>
+                <p style="color: Grey;" ng-model="last_synced">Last Sync Time :{{last_synced}}</p>
             </div>
             <div class="ot-dashboard__btn">
+						<button type="button" class="btn btn-primary ot-dashboard__primary-btn"
+							ng-click="syncBusinessApp()">Sync Applications</button>
                 <button type="button" class="btn btn-primary ot-dashboard__primary-btn"
-                    ng-click="call()">Sync Applications</button>
+                    ng-click="syncOrganizations()">Sync Organization</button>
                 <button type="button" class="btn btn-primary ot-dashboard__primary-btn"
-                    ng-click="call()">Sync Organization</button>
-                <button type="button" class="btn btn-primary ot-dashboard__primary-btn">
+						ng-click="getEmailNotifications()">
                     Email Notifications</button>
             </div>
         </div>
@@ -342,13 +358,13 @@ app.controller('dashboardController', function ($scope, $http) {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-02 14:13:41</sys_created_on>
         <sys_id>8dff4a5b4f782300f20f1b818110c75e</sys_id>
-        <sys_mod_count>74</sys_mod_count>
+        <sys_mod_count>97</sys_mod_count>
         <sys_name>Dashboard</sys_name>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
         <sys_policy/>
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
         <sys_update_name>sys_ui_page_8dff4a5b4f782300f20f1b818110c75e</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-08 18:35:06</sys_updated_on>
+        <sys_updated_on>2018-10-10 17:24:23</sys_updated_on>
     </sys_ui_page>
 </record_update>

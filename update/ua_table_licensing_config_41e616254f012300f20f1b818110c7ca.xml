@@ -4,22 +4,22 @@
         <license_condition/>
         <license_model>none</license_model>
         <license_roles/>
-        <name>x_261942_ot_orgtable</name>
+        <name>x_261942_ot_apikey</name>
         <op_delete>true</op_delete>
         <op_insert>true</op_insert>
         <op_update>true</op_update>
         <owner_condition/>
         <sys_class_name>ua_table_licensing_config</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2018-10-04 22:29:13</sys_created_on>
-        <sys_id>fdd4960c4fcd2300f20f1b818110c7ff</sys_id>
+        <sys_created_on>2018-08-24 19:02:08</sys_created_on>
+        <sys_id>41e616254f012300f20f1b818110c7ca</sys_id>
         <sys_mod_count>0</sys_mod_count>
-        <sys_name>x_261942_ot_orgtable</sys_name>
+        <sys_name>x_261942_ot_apikey</sys_name>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
         <sys_policy/>
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
-        <sys_update_name>ua_table_licensing_config_fdd4960c4fcd2300f20f1b818110c7ff</sys_update_name>
+        <sys_update_name>ua_table_licensing_config_41e616254f012300f20f1b818110c7ca</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-04 22:29:13</sys_updated_on>
+        <sys_updated_on>2018-08-24 19:02:08</sys_updated_on>
     </ua_table_licensing_config>
 </record_update>

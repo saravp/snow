@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element label="ot_organizations" max_length="40" name="x_261942_ot_orgtable" type="collection">
+        <element label="Has Child" max_length="40" name="has_child" read_only="true" type="boolean"/>
         <element display="true" label="Org Name" max_length="40" name="org_name" read_only="true" type="string"/>
         <element label="Org GUID" max_length="40" name="ot_id" read_only="true" type="string"/>
         <element label="Parent GUID" max_length="40" name="parent_id" read_only="true" type="string"/>
         <element label="Position" max_length="40" name="position" type="string"/>
         <element attributes="tree_picker=true" label="Parent" max_length="40" name="u_parent" read_only="true" reference="x_261942_ot_orgtable" reference_cascade_rule="restrict" type="reference"/>
+        <index name="index">
+            <element name="u_parent"/>
+        </index>
     </element>
 </database>

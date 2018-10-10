@@ -10,14 +10,15 @@
 otGetOrgGroup.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
 	
 	getOrgObj: function () {
-		var sn = new sn_ws.RESTMessageV2();
-		sn.setEndpoint("https://m0ayqnd8l9.execute-api.us-east-1.amazonaws.com/Test");
-		sn.setHttpMethod("GET");
-		sn.setRequestHeader("APIKey", "ccf1be5d04b7f475ec2455ab825aed1a");
-		sn.setRequestHeader("user-agent",'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36');
-		sn.setRequestHeader("Accept","application/json");
-		sn.setRequestHeader('Content-Type','application/json');
-		var response = sn.executeAsync();
+		this.deleteExistingRecord();
+		var otFetchOrgRestApi = new sn_ws.RESTMessageV2();
+		otFetchOrgRestApi.setEndpoint("https://m0ayqnd8l9.execute-api.us-east-1.amazonaws.com/Test");
+		otFetchOrgRestApi.setHttpMethod("GET");
+		otFetchOrgRestApi.setRequestHeader("APIKey", "ccf1be5d04b7f475ec2455ab825aed1a");
+		otFetchOrgRestApi.setRequestHeader("user-agent",'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36');
+		otFetchOrgRestApi.setRequestHeader("Accept","application/json");
+		otFetchOrgRestApi.setRequestHeader('Content-Type','application/json');
+		var response = otFetchOrgRestApi.executeAsync();
 		response.waitForResponse(100);
 		httpResponseStatus = response.getStatusCode();
 		var responseBody = JSON.parse(response.getBody());
@@ -25,40 +26,60 @@ otGetOrgGroup.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
 		this.populateParents();
 	},
 	
-	flattenOrg: function(obj) {
-		var gr = new GlideRecord('x_261942_ot_orgtable');
-		gr.newRecord();
-		gr.parent_id = obj.parentId;
-		gr.org_name = obj.name;
-		gr.position = obj.position;
-		gr.ot_id = obj.id;
-		gr.insert();
-		if (obj.children && obj.children.length) {
-			for (var i = 0; i < obj.children.length; i++) {
-				this.flattenOrg(obj.children[i]);
+	deleteExistingRecord: function() {
+		var childRecords = new GlideRecord('x_261942_ot_orgtable');
+		childRecords.addQuery('has_child', false);
+		childRecords.query();
+		childRecords.deleteMultiple();
+		this.deleteParentRecords();
+	},
+	
+	deleteParentRecords: function () {
+		var parentRecords = new GlideRecord('x_261942_ot_orgtable');
+		parentRecords.addQuery('has_child', true);
+		parentRecords.query();
+		parentRecords.deleteMultiple();
+		if (parentRecords.getRowCount() > 0) {
+			this.deleteParentRecords();
+		}
+	},
+	
+	flattenOrg: function(org) {
+		var organization = new GlideRecord('x_261942_ot_orgtable');
+		organization.newRecord();
+		organization.parent_id = org.parentId;
+		organization.org_name = org.name;
+		organization.position = org.position;
+		organization.ot_id = org.id;
+		if (org.children && org.children.length) {
+			organization.has_child = true;
+			for (var i = 0; i < org.children.length; i++) {
+				this.flattenOrg(org.children[i]);
 			}
 		}
+		organization.insert();
+
 		
 	},
 	
-	populateParents: function(obj) {
-		function getParent(val){
-			var gt = new GlideRecord ('x_261942_ot_orgtable');
+	populateParents: function() {
+		function getParent(id){
+			var orgRecords = new GlideRecord ('x_261942_ot_orgtable');
 			var parent = '';
-			gt.addQuery('ot_id', val);
-			gt.setLimit(1);
-			gt.query();
-			while (gt.next()){
-				parent =  gt.sys_id;
+			orgRecords.addQuery('ot_id', id);
+			orgRecords.setLimit(1);
+			orgRecords.query();
+			while (orgRecords.next()){
+				parent = orgRecords.sys_id;
 			}
 			return parent;
 		}
 		
-		var gr = new GlideRecord ('x_261942_ot_orgtable');
-		gr.query();
-		while (gr.next()){
-			gr.u_parent = getParent(gr.parent_id);
-			gr.update();
+		var fetchRecords = new GlideRecord ('x_261942_ot_orgtable');
+		fetchRecords.query();
+		while (fetchRecords.next()){
+			fetchRecords.u_parent = getParent(fetchRecords.parent_id);
+			fetchRecords.update();
 		}
 		
 	},
@@ -69,13 +90,13 @@ otGetOrgGroup.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-04 21:53:31</sys_created_on>
         <sys_id>ad6cca444fcd2300f20f1b818110c74f</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>30</sys_mod_count>
         <sys_name>otGetOrgGroup</sys_name>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
         <sys_update_name>sys_script_include_ad6cca444fcd2300f20f1b818110c74f</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-08 19:28:38</sys_updated_on>
+        <sys_updated_on>2018-10-10 17:19:17</sys_updated_on>
     </sys_script_include>
 </record_update>

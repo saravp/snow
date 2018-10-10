@@ -30,7 +30,7 @@
         <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
 var location = '';
         if (current.x_261942_ot_hosting_location.name){
-			if (current.x_261942_ot_hosting_location.name == 'United States of America'){
+			if (current.x_261942_ot_hosting_location.name === 'United States of America'){
 				location ='United States';
 			}
 			else  {
@@ -108,7 +108,7 @@ current.update();
 	}
 		}
 		else {
-			gs.eventQueue('x_261942_ot.ot_ba_required_fields_notification',current,current.it_application_owner.name,current.name);
+			gs.eventQueue('x_261942_ot.ot_ba_required_fields_notifi',current,current.it_application_owner.name,current.name);
 
 		}
 
@@ -124,7 +124,7 @@ var foo2 =new otUpdateAssetCounts();
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>f6a615cf4f186300f20f1b818110c7e7</sys_id>
-        <sys_mod_count>27</sys_mod_count>
+        <sys_mod_count>30</sys_mod_count>
         <sys_name>ot_create_business_application</sys_name>
         <sys_overrides/>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
@@ -132,7 +132,7 @@ var foo2 =new otUpdateAssetCounts();
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
         <sys_update_name>sys_script_f6a615cf4f186300f20f1b818110c7e7</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-08 20:23:04</sys_updated_on>
+        <sys_updated_on>2018-10-09 21:02:23</sys_updated_on>
         <template/>
         <when>async</when>
     </sys_script>
