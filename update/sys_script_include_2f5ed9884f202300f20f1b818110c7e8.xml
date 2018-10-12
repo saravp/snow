@@ -16,14 +16,22 @@ otCreateBusinessApplication.prototype = Object.extendsObject(global.AbstractAjax
 		
 		var querystring = 'x_261942_ot_guidISEMPTY';
 		var querystring2 = 'x_261942_ot_hosting_locationISEMPTY';
-		var gr2 = new GlideRecord('cmdb_ci_business_app');
+		var itAppOwner = [];
+		var gr2 = new GlideRecord('cmdb_ci_business_app'); 
 		gr2.addEncodedQuery(querystring);
 		gr2.addEncodedQuery(querystring2);
 		gr2.query();
-		while(gr2.next()) {
-			gs.eventQueue('x_261942_ot.ot_ba_required_fields_notifi', gr2, gr2.it_application_owner.email,gr2.name);
-		}
-		
+		while (gr2.next()) {
+	    gs.info('************log messsage************' + gr2.it_application_owner.email + gr2.name + gr2.it_application_owner.name);
+	    if (itAppOwner.indexOf((gr2.it_application_owner.name).toString()) === -1) {
+	        itAppOwner.push(gr2.it_application_owner.name.toString());
+	    }
+	}
+	gs.info(itAppOwner);
+	for (var i = 0; i < itAppOwner.length; i++) {
+	    gs.info("*******#############******");
+	    gs.eventQueue('x_261942_ot.ot_ba_required_fields_notifi', gr2, itAppOwner[i], '');
+	}
 		var apikey;
 		var url;
 		//Fetch API key from a table. Here name of the table is x_261942_ot_apikey
@@ -115,13 +123,13 @@ otCreateBusinessApplication.prototype = Object.extendsObject(global.AbstractAjax
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-09-09 22:05:01</sys_created_on>
         <sys_id>2f5ed9884f202300f20f1b818110c7e8</sys_id>
-        <sys_mod_count>33</sys_mod_count>
+        <sys_mod_count>45</sys_mod_count>
         <sys_name>otCreateBusinessApplication</sys_name>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
         <sys_update_name>sys_script_include_2f5ed9884f202300f20f1b818110c7e8</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-09 17:58:05</sys_updated_on>
+        <sys_updated_on>2018-10-12 14:38:52</sys_updated_on>
     </sys_script_include>
 </record_update>

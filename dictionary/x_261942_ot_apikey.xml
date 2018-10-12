@@ -3,5 +3,6 @@
         <element label="API Key" mandatory="true" max_length="40" name="apikey" type="string"/>
         <element label="Email Notification" max_length="40" name="notification_s" type="boolean"/>
         <element label="URL" mandatory="true" max_length="500" name="url" type="url"/>
+        <element label="Email" max_length="40" name="u_email" type="boolean"/>
     </element>
 </database>

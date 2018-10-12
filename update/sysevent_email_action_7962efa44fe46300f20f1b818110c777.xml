@@ -3,7 +3,32 @@
         <action_insert>false</action_insert>
         <action_update>false</action_update>
         <active>true</active>
-        <advanced_condition/>
+        <advanced_condition><![CDATA[var businesssApp = [];
+var querystring = 'x_261942_ot_guidISEMPTY';
+var querystring2 = 'x_261942_ot_hosting_locationISEMPTY';
+var gr2 = new GlideRecord('cmdb_ci_business_app');
+gr2.addEncodedQuery(querystring);
+gr2.addEncodedQuery(querystring2);
+gr2.query();
+gs.info(event.parm1 + event.parm2);
+while (gr2.next()) {
+	gs.info('loop'+event.parm1+'*'+gr2.it_application_owner.name.toString()+'*'+gr2.name.toString());
+	if(event.parm1 == gr2.it_application_owner.name){
+		gs.info('inside the if loop');
+		businesssApp.push(gr2.name.toString());
+	}
+}
+gs.info(businesssApp.toString());
+listItems = businesssApp.reduce(function (result, item) {
+	result += '<li>' + item + '</li>';
+	return result;
+}, '');
+
+resultElement = document.getElementById('result');
+
+resultElement.innerHTML = listItems;
+
+answer = true; // set answer = true for kicking of the notifications]]></advanced_condition>
         <affected_field_on_event/>
         <category display_value="Uncategorized" name="Uncategorized">c97d83137f4432005f58108c3ffa917a</category>
         <collection/>
@@ -36,94 +61,7 @@
         <mandatory>false</mandatory>
         <message/>
         <message_html><![CDATA[<style type="text/css"><!--
-<span id="__caret">_</span><!--
-<span id="__caret">_</span><!--
-�<span id="__caret">_</span><!--
-<span id="__caret">_</span>�<span id="__caret">_</span>�<span id="__caret">_</span>�<span id="__caret">_</span>�<span id="__caret">_</span>�<span id="__caret">_</span>�<span id="__caret">_</span>�<span id="__caret">_</span><!--
-/* Client-specific Styles */
-        #outlook a {padding:0;} /* Force Outlook to provide a "view in browser" menu link. */
-        body {
-            width: 100% !important;
-            -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
-            margin:0;
-            padding:0;
-                  word-wrap: break-word;
-              overflow-wrap: break-word;
-            /* Warning: Needed for oldIE support, but words are broken up letter-by-letter */
-             -ms-word-break: break-all;
-                 word-break: break-all;
-            /* Non standard for webkit */
-                 word-break: break-word;
-            -webkit-hyphens: auto;
-               -moz-hyphens: auto;
-                -ms-hyphens: auto;
-                    hyphens: auto;
-        }
-        /* Prevent Webkit and Windows Mobile platforms from changing default font sizes, while not breaking desktop design. */
-        .ExternalClass {width:100%;} /* Force Hotmail to display emails at full width */
-        .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;} /* Force Hotmail to display normal line spacing. More on that: http://www.emailonacid.com/forum/viewthread/43/ */
-        #backgroundTable {margin:0; padding:0; width:100% !important; line-height: 100% !important;}
-        img {outline:none; text-decoration:none;border:none; -ms-interpolation-mode: bicubic;}
-        a img {border:none;}
-        .image_fix {display:block;}
-        p {margin: 0px 0px !important;}
-        table td {border-collapse: collapse;}
-        table { border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; }
-        /*a {color: #e95353;text-decoration: none;text-decoration:none!important;}*/
-        /*STYLES*/
-        table[class=full] { width: 100%; clear: both; }
- 
-        /*################################################*/
-        /*TABLET STYLES*/
-        /*################################################*/
-        @media only screen and (max-width: 640px) {
-            a[href^="tel"], a[href^="sms"] {
-                text-decoration: none;
-                color: #ffffff; /* or whatever your want */
-                pointer-events: none;
-                cursor: default;
-            }
-            .mobile_link a[href^="tel"], .mobile_link a[href^="sms"] {
-                text-decoration: default;
-                color: #ffffff !important;
-                pointer-events: auto;
-                cursor: default;
-            }
-            table[class=devicewidth] {width: 440px!important;text-align: center!important;}
-            table[class=devicewidthinner] {width: 400px!important;text-align: center!important;}
-            table[class="sthide"]{display: none!important;}
-            img[class="bigimage"]{width: 120px!important;height:auto!important;}
-            img[class="col2img"]{width: 420px!important;height:258px!important;}
-            img[class="image-banner"]{width: 440px!important;height:106px!important;}
-            td[class="menu"]{text-align: center !important; padding: 10px 0 10px 0 !important;}
-            td[class="logo"]{padding:20px 0 20px 0!important;margin: 0 auto !important;}
-            img[class="logo"]{padding:0!important;margin: 0 auto !important;}
-        }
- 
-        /*##############################################*/
-        /*MOBILE STYLES*/
-        /*##############################################*/
-        @media only screen and (max-width: 480px) {
-            a[href^="tel"], a[href^="sms"] {
-                text-decoration: none;
-                color: #ffffff; /* or whatever your want */
-                pointer-events: none;
-                cursor: default;
-            }
-            .mobile_link a[href^="tel"], .mobile_link a[href^="sms"] {
-                text-decoration: default;
-                color: #ffffff !important;
-                pointer-events: auto;
-                cursor: default;
-            }
-            table[class=devicewidth] {width: 320px!important;text-align: center!important;}
-            table[class=devicewidthinner] {width: 280px!important;text-align: center!important;}
-            table[class="sthide"]{display: none!important;}
-            img[class="bigimage"]{width: 120px!important;height:auto!important;}
-            img[class="col2img"]{width: 260px!important;height:160px!important;}
-            img[class="image-banner"]{width: 280px!important;height:68px!important;}
-        }
+<span id="CmCaReT"></span>
 --></style>
 <div class="block"><!-- preheader -->
 <table id="backgroundTable" border="0" width="100%" cellspacing="0" cellpadding="0" bgcolor="#f6f4f5">
@@ -184,22 +122,25 @@
 <td style="font-family: Helvetica, arial, sans-serif; font-size: 14px; color: #95a5a6; line-height: 25px;"><br />
 <p style="padding-left: 3rem; margin-right: 3rem;">Hi ${event.parm1},</p>
 <br />
-<p style="padding-left: 3rem; margin-right: 3rem;">Please update the Hosting Location for <strong>${event.parm2}</strong> in Business Applications.</p>
-<br />
-<p style="padding-left: 3rem; margin-right: 3rem;">Thanks, <br /> Privacy Team</p>
+<p style="padding-left: 3rem; margin-right: 3rem;">Please update the Hosting Location for the following Business Applications</p>
+<div id="result">&nbsp;</div>
 </td>
 </tr>
-<!-- spacing -->
-<tr>
-<td width="100%" height="10">&nbsp;</td>
-</tr>
-<!-- /spacing --></tbody>
+</tbody>
 </table>
 </td>
 </tr>
 </tbody>
 </table>
-<!-- /content --></div>
+</div>
+<!--<strong>${<strong>event.parm2}</strong>&nbsp;</strong>in Business Applications.-->
+<p>&nbsp;</p>
+<p style="padding-left: 3rem; margin-right: 3rem;">Thanks, <br /> Privacy Team</p>
+<!-- spacing -->
+<p>&nbsp;</p>
+<!-- /spacing -->
+<p>&nbsp;</p>
+<!-- /content -->
 <div class="block"><!-- footer -->
 <table id="backgroundTable" border="0" width="100%" cellspacing="0" cellpadding="0" bgcolor="#f6f4f5">
 <tbody>
@@ -253,7 +194,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>7962efa44fe46300f20f1b818110c777</sys_id>
-        <sys_mod_count>20</sys_mod_count>
+        <sys_mod_count>59</sys_mod_count>
         <sys_name>otNotifyMissingLocation</sys_name>
         <sys_overrides/>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
@@ -261,7 +202,7 @@
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
         <sys_update_name>sysevent_email_action_7962efa44fe46300f20f1b818110c777</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-10 14:48:56</sys_updated_on>
+        <sys_updated_on>2018-10-12 19:05:15</sys_updated_on>
         <sys_version>2</sys_version>
         <template display_value="Unsubscribe and Preferences">7ed0481f3b0b2200c869c2c703efc487</template>
         <type>email</type>

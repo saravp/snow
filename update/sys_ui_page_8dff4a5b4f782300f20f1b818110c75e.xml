@@ -7,6 +7,11 @@ app.controller('dashboardController', function ($scope, $http) {
 	
 				// setting the variable for our data in that is to be displayed in the Donut chart
 	
+	var gr2 = new GlideRecord('cmdb_ci_business_app');
+	gr2.query();
+	console.log("*********Harsha********");
+	console.log(JSON.stringify(gr2));
+	
 				var gr = new GlideRecord('x_261942_ot_assets');
 				gr.addQuery('type','Application');
 				gr.query();
@@ -212,6 +217,7 @@ app.controller('dashboardController', function ($scope, $http) {
 									boxWidth: 15,
 									position: 'bottom',
 									label: {
+										 usePointStyle: true,
 										generateLabels:  function (chart) {
 											chart.legend.afterFit = function () {
 												var width = this.width;
@@ -285,7 +291,7 @@ app.controller('dashboardController', function ($scope, $http) {
     <style>
         #otDonutChart {
 			width: 100%;
-			height: 50%;
+<!-- 			height: 50%; -->
 			border-color: 1px solid #DDDDDD;
 			border: 1px solid #DDDDDD;
 			margin-top: 3rem;
@@ -294,13 +300,15 @@ app.controller('dashboardController', function ($scope, $http) {
         }
 		.ot-dashboard__chart {
 			margin: auto;
-			width: 50%;
+<!-- 			width: 50%; -->
 			padding: 10px;
+			max-width: 600px;
 		}
 		.ot-banner {
 			text-align: center;
 			background-color: #6fbe51;
-			height: 20%;
+<!-- 			height: 20%; -->
+			padding: 4rem 2rem;
 			color: #ffffff;
 			font-family: 'Open Sans', sans-serif;
 		}
@@ -334,8 +342,10 @@ app.controller('dashboardController', function ($scope, $http) {
                 <h1 class="ot-banner__heading">OneTrust</h1>
                 <p class="ot-banner__sub-heading">Privacy Mangament Software</p>
             </div>
-            <div id="chart" class="ot-dashboard__chart row-xs-12">
+            <div id="chart" class="ot-dashboard__chart">
+				<div>
                 <canvas id="otDonutChart">Summary Of the Business Applications</canvas>
+					</div>
             </div><br /><br />
             <div class="ot-dashboard__btn">
                 <p style="color: Grey;" ng-model="last_synced">Last Sync Time :{{last_synced}}</p>
@@ -358,13 +368,13 @@ app.controller('dashboardController', function ($scope, $http) {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-02 14:13:41</sys_created_on>
         <sys_id>8dff4a5b4f782300f20f1b818110c75e</sys_id>
-        <sys_mod_count>97</sys_mod_count>
+        <sys_mod_count>101</sys_mod_count>
         <sys_name>Dashboard</sys_name>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
         <sys_policy/>
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
         <sys_update_name>sys_ui_page_8dff4a5b4f782300f20f1b818110c75e</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-10 17:24:23</sys_updated_on>
+        <sys_updated_on>2018-10-11 20:07:06</sys_updated_on>
     </sys_ui_page>
 </record_update>

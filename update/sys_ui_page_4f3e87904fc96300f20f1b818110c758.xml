@@ -8,23 +8,25 @@ app.controller('otSettingsCtrl', function ($scope) {
     $scope.notificationVal = false;
     var insert = true;
     var previousValue = '';
-	var initialSettingsRecord;
+	var justVal;
     
     $scope.onInitCode = (function () {
-        this.initialSettingsRecord = new GlideRecord('x_261942_ot_apikey');
-        this.initialSettingsRecord.orderByDesc('sys_created_on');
-        this.initialSettingsRecord.setLimit(1);
-        this.initialSettingsRecord.query();
-		console.log("initial value record" + JSON.stringify(this.initialSettingsRecord));
-        if (this.initialSettingsRecord.next()) {
+        var initialSettingsRecord = new GlideRecord('x_261942_ot_apikey');
+        initialSettingsRecord.orderByDesc('sys_created_on');
+        initialSettingsRecord.setLimit(1);
+        initialSettingsRecord.query();
+        if (initialSettingsRecord.next()) {
 			var g_form = new GlideForm();
             insert = false;
-            $scope.apiKeyValue = this.initialSettingsRecord.apikey;
-            $scope.envValue = this.initialSettingsRecord.url;
+            $scope.apiKeyValue = initialSettingsRecord.apikey;
+            $scope.envValue = initialSettingsRecord.url;
             previousValue = $scope.apiKeyValue;
-            $scope.envValue = this.initialSettingsRecord.url;
-//             $scope.notificationVal = this.initialSettingsRecord.notification_s;
-			g_form.setValue('notificationVal', this.initialSettingsRecord.notification_s);
+            $scope.envValue = initialSettingsRecord.url;
+            $scope.notificationVal = initialSettingsRecord.notification_s;
+			justVal = $scope.notificationVal;
+			g_form.setValue('email', true);
+// 			document.getElementById('email').value = $scope.notificationVal;
+// 				console.log(document.getElementById('email').value);
         }
     })();
     
@@ -37,15 +39,15 @@ app.controller('otSettingsCtrl', function ($scope) {
             getSettingsParams.setValue('notification_s', $scope.notificationVal);
             getSettingsParams.insert();
         } else if ($scope.apiKeyValue && $scope.envValue){
-            this.initialSettingsRecord = new GlideRecord('x_261942_ot_apikey');
-			console.log("on submit value record" + JSON.stringify(this.initialSettingsRecord));
-            this.initialSettingsRecord.addQuery('apikey', previousValue);
-            this.initialSettingsRecord.query();
-            while (this.initialSettingsRecord.next()) {
-                this.initialSettingsRecord.setValue('apikey', $scope.apiKeyValue);
-                this.initialSettingsRecord.setValue('url', $scope.envValue);
-                this.initialSettingsRecord.setValue('notification_s', $scope.notificationVal);
-                this.initialSettingsRecord.update();
+            var updateSettings = new GlideRecord('x_261942_ot_apikey');
+			console.log(document.getElementById('email').value);
+            updateSettings.addQuery('apikey', previousValue);
+            updateSettings.query();
+            while (updateSettings.next()) {
+                updateSettings.setValue('apikey', $scope.apiKeyValue);
+                updateSettings.setValue('url', $scope.envValue);
+                updateSettings.setValue('notification_s', $scope.notificationVal);
+                updateSettings.update();
             }
         } else {
             alert("Please fill both the fields");
@@ -102,10 +104,17 @@ app.controller('otSettingsCtrl', function ($scope) {
             padding: 2rem 3rem 2rem 3rem;
             font-weight: 300;
         }
+		
+		.ot-error {
+			color: red;
+		}
+		
     </style>
 
     <body class="ot-settings" ng-app="otSettings">
+		
         <div ng-controller="otSettingsCtrl">
+			
             <h2 class="ot-settings__header">OneTrust Settings</h2>
             <div class="container ot-settings__form">
                 <form>
@@ -118,12 +127,26 @@ app.controller('otSettingsCtrl', function ($scope) {
                         <label for="otSettingsEnv">Environment URL</label>
                         <input type="url" class="form-control" id="exampleInputPassword1" placeholder="Please Enter OneTrust Environment"
                             ng-model="envValue" ng-value="envValue" ng-change="onEnvChnage(envValue)" />
+						<p class="ot-error">Please enter valid url</p>
                     </fieldset>
                     <div class="checkbox">
+						<g:evaluate var="jvar_menu" object="true" jelly="true">    
+
+			var inc = new GlideRecord('x_261942_ot_apikey');
+
+			inc.orderByDesc('sys_created_on');
+
+			inc..setLimit(1);
+
+			inc.query();    
+			inc;
+
+		</g:evaluate>
                         <label style="font-weight: bold;">
-                            <input type="checkbox" ng-checked="notificationVal" ng-model="notificationVal" id="notificationcheck" name="emailNotification"
-                                value="notificationVal" />
-                            Email Notification
+                            <!-- <input type="checkbox" ng-model="notificationVal" value="inc.notification_s" ng-checked=""
+                               /> -->
+							<g:ui_checkbox name="${jvar_menu.getValue('notification_s')}" id="email" value="${jvar_menu.getValue('notification_s')}" />
+                            Email Notification {{notificationVal}}
                         </label>
                     </div>
                     <button type="submit" class="btn btn-primary ot-settings__primary-btn" ng-click="onSettingSubmit()"
@@ -139,13 +162,13 @@ app.controller('otSettingsCtrl', function ($scope) {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-10-05 21:20:53</sys_created_on>
         <sys_id>4f3e87904fc96300f20f1b818110c758</sys_id>
-        <sys_mod_count>34</sys_mod_count>
+        <sys_mod_count>111</sys_mod_count>
         <sys_name>Settings</sys_name>
         <sys_package display_value="OT" source="x_261942_ot">2fd4a5334f231300f20f1b818110c702</sys_package>
         <sys_policy/>
         <sys_scope display_value="OT">2fd4a5334f231300f20f1b818110c702</sys_scope>
         <sys_update_name>sys_ui_page_4f3e87904fc96300f20f1b818110c758</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-10-10 17:38:54</sys_updated_on>
+        <sys_updated_on>2018-10-10 22:45:53</sys_updated_on>
     </sys_ui_page>
 </record_update>
